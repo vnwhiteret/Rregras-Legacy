@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Empregos — Legacy RP</title>
+<meta name="description" content="Tutorial de todos os empregos da cidade Legacy RP: o que precisa, passo a passo e quanto paga.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  <div class="traffic"><i></i><i></i><i></i></div>
+  <a class="brand" href="#inicio"><span class="logo"><i class="fa-solid fa-city"></i></span><span>Legacy RP<small>Tutorial dos empregos</small></span></a>
+  <nav class="pages"><a href="index.html">Regras</a><a href="empregos.html" class="on">Empregos</a></nav>
+  <div class="grow"></div>
+  <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar... (ex: picareta, leite, frete)" autocomplete="off"></label>
+</header>
+
+<div class="layout">
+  <aside id="side"></aside>
+  <main>
+    <div class="hero" id="inicio">
+      <h1>💼 Empregos da Legacy RP</h1>
+      <p>Tudo o que você precisa saber para começar a ganhar dinheiro: o que levar, o passo a passo de cada emprego e quanto ele paga. Os valores são os do servidor hoje e podem mudar.</p>
+      <div class="quick" id="quick"></div>
+    </div>
+    <div id="content"></div>
+    <div class="empty" id="empty"><i class="fa-solid fa-magnifying-glass" style="font-size:28px;margin-bottom:10px;display:block"></i>Nada encontrado.</div>
+    <footer>Legacy RP · Dúvida? Abra um ticket no Discord.</footer>
+  </main>
+</div>
+
+<script>
+// Conteudo dos empregos. Para editar: mude o texto aqui. **texto** vira negrito.
+// precisa = o que levar · passos = [titulo, explicacao] · blocos = dicas e regras
+const SECOES = [
+  { grupo: 'Comece aqui', id: 'comecar', icon: 'fa-flag-checkered', cor: 'c1', titulo: 'Como começar', tiles: [
+    { t: '🏢 Agência de Empregos', v: 'Vá no blip da agência e escolha um emprego. Os empregos livres não precisam de entrevista.' },
+    { t: '🧭 Comando /guia', v: 'Mostra o **passo atual** do seu emprego, marca o **GPS** e liga um painel com todos os passos.' },
+    { t: '💵 Como você ganha', v: 'Nos empregos livres você ganha pelo que **produz e vende**. Não tem salário.' },
+  ], blocos: [
+    { h: 'Primeiros passos', itens: [
+      'Pegue o emprego na **Agência de Empregos** e digite **/guia** no chat: ele te leva de passo em passo.',
+      'Cada passo feito libera o próximo sozinho. Se perder o caminho, é só digitar **/guia** de novo.',
+      'A maioria dos itens de trabalho (ferramentas, baldes, iscas) está no **mercado de Sandy Shores**.',
+      'Dinheiro na mão pode ser perdido. Guarde no **banco** sempre que puder.',
+    ]},
+    { h: 'Carteira de motorista (Detran)', itens: [
+      'Prova teórica: **R$ 500**',
+      'Carro: **R$ 2.500** · Moto: **R$ 3.000** · Caminhão: **R$ 5.000**',
+      'Licença de barco: **R$ 5.000**, comprada direto no Detran, sem prova.',
+    ]},
+  ]},
+
+  { grupo: 'Empregos livres', id: 'minerador', icon: 'fa-gem', cor: 'c2', titulo: 'Minerador',
+    sub: 'Minere pedras, lave, funda e venda os minérios — ou transforme em joias, que pagam mais.',
+    precisa: ['Picareta', 'Peneira', 'Carvão (1 por fornada)', 'Comprados no **mercado de Sandy Shores**'],
+    passos: [
+      ['Comprar as ferramentas', 'No mercado de Sandy Shores compre a **picareta** (minerar), a **peneira** (lavar) e **carvão** (fundir).'],
+      ['Minerar', 'Vá até a mineração, chegue perto de uma rocha e aperte **E**. Cada rocha precisa de **3 batidas**. Junte **10 pedras sujas**.'],
+      ['Lavar as pedras', 'Com a peneira, vá na lavagem e aperte **E** no círculo azul. Cada lavagem transforma **4 pedras sujas em 4 lavadas** (5 segundos).'],
+      ['Fundir', 'Na fundição, aperte **E** no círculo vermelho, coloque **10 pedras lavadas + 1 carvão** na fornalha e clique em **Fundir**. Sai ferro, cobre, prata, ouro, rubi ou diamante.'],
+      ['Vender ou fazer joias', 'Venda os minérios no ponto de venda. Ou faça **joias** na máquina de joias (móvel de casa) e venda na **Loja de Joias**, que paga cerca de **50% a mais**.'],
+    ],
+    tiles: [
+      { t: '⛏️ Preço base dos minérios', v: 'Ferro **R$ 90** · Cobre **R$ 140** · Prata **R$ 290**<br>Ouro **R$ 675** · Rubi **R$ 1.250** · Diamante **R$ 2.200**' },
+      { t: '💍 Joias', v: 'De **R$ 950** a **R$ 9.400** cada. O preço muda a cada **40 minutos**.' },
+    ],
+    blocos: [{ h: 'Dicas', itens: [
+      'Leve carvão sobrando: sem carvão não dá para fundir.',
+      'Diamante e rubi são raros. Vale guardar para fazer joia.',
+    ]}],
+  },
+
+  { id: 'pescador', icon: 'fa-fish', cor: 'c5', titulo: 'Pescador',
+    sub: 'Pesque no lago Alamo Sea e venda os peixes no porto. Não precisa de roupa.',
+    precisa: ['Vara de pesca', 'Iscas (1 por peixe)', 'Comprados no **mercado de Sandy Shores**', 'Opcional: alugar o **bote** (R$ 5 por minuto)'],
+    passos: [
+      ['Comprar vara e isca', 'No mercado de Sandy Shores compre a **vara de pesca** e as **iscas**.'],
+      ['Pegar o bote (opcional)', 'No píer do lago Alamo Sea, alugue o bote de pesca. Ele cobra **R$ 5 por minuto** até você devolver.'],
+      ['Pescar', 'No lago, aperte **E** para pescar, no bote ou na margem. Cada peixe gasta **1 isca**.'],
+      ['Devolver o bote', 'Devolva o bote no ponto de aluguel do píer para **parar de cobrar**.'],
+      ['Vender', 'No ponto de entrega, aperte **E** e **arraste os peixes** para o balcão. Paga na hora.'],
+    ],
+    tiles: [{ t: '🐟 Preço dos peixes', v: 'Tubarão **R$ 200** · Salmão **R$ 100**<br>Arenque / perca **R$ 60** · Anchova / bagre **R$ 55**<br>Sardinha / truta / peixe-relógio **R$ 50**' }],
+    blocos: [{ h: 'Dicas', itens: [
+      'Sardinha é comum. **Salmão e tubarão** são raros e valem mais.',
+      'Pescar na margem é de graça: o bote só ajuda a ir para o meio do lago.',
+    ]}],
+  },
+
+  { id: 'lixeiro', icon: 'fa-trash-can', cor: 'c3', titulo: 'Lixeiro',
+    sub: 'Colete o lixo da cidade com o caminhão. Dá para trabalhar em grupo.',
+    precisa: ['Nada — a roupa e o caminhão são da empresa'],
+    passos: [
+      ['Bater o ponto', 'No depósito, aperte **E** no relógio de ponto para começar e vestir a roupa.'],
+      ['Pegar o caminhão', 'Aperte **E** no ponto ao lado para pegar o caminhão de lixo.'],
+      ['Coletar', 'Siga a **rota amarela** no mapa. Na lixeira, pegue os sacos (**E**) e jogue na traseira do caminhão. Repita nas próximas paradas.'],
+      ['Receber', 'Quando terminar, volte ao depósito com o caminhão e aperte **E** para receber.'],
+    ],
+    tiles: [{ t: '💵 Pagamento', v: '**R$ 100** por parada + **R$ 10** por saco, para **cada pessoa** do grupo.' }],
+    blocos: [{ h: 'Dicas', itens: ['Chame amigos: cada um recebe a sua parte e as paradas acabam mais rápido.'] }],
+  },
+
+  { id: 'sucateiro', icon: 'fa-recycle', cor: 'c7', titulo: 'Sucateiro',
+    sub: 'Procure peças nos ferros velhos, transforme em material e venda.',
+    precisa: ['Nada para começar — só espaço no inventário'],
+    passos: [
+      ['Procurar sucata', 'Vá a um **ferro velho** (blip no mapa) e procure peças nas carcaças de carro e caçambas (**E**).'],
+      ['Desmanchar as peças', 'Leve as peças ao desmanche de **Sandy Shores** e aperte **E** para virar material.'],
+      ['Vender', 'Venda os materiais no ponto **Venda de Materiais**.'],
+    ],
+    tiles: [{ t: '🔩 Preço dos materiais', v: 'Chumbo **R$ 40** · Alumínio **R$ 30** · Aço **R$ 20**<br>Borracha **R$ 10** · Tecido **R$ 10**' }],
+  },
+
+  { id: 'fazendeiro', icon: 'fa-cow', cor: 'c4', titulo: 'Fazendeiro (Leite)',
+    sub: 'Ordenhe as vacas, processe o leite e venda no porto. O leite também é a base do queijo.',
+    precisa: ['Baldes vazios (**R$ 50** cada)', 'Caixas de leite vazias (**R$ 25** cada)', '10 caixas para cada 5 baldes', 'Comprados no **mercado**'],
+    passos: [
+      ['Vestiário', 'Na fazenda, aperte **E** no vestiário para colocar a roupa de trabalho.'],
+      ['Comprar balde e embalagens', 'No mercado, compre **baldes vazios** e **caixas de leite vazias**.'],
+      ['Ordenhar', 'Volte à fazenda, fique perto de uma vaca e aperte **E**. Cada ordenha gasta **1 balde vazio**. Junte **5 baldes de leite**.'],
+      ['Processar', 'Leve **5 baldes de leite + 10 caixas vazias** ao processamento e aperte **E**.'],
+      ['Vender', 'Venda as caixas de leite no **porto**: **R$ 40** cada.'],
+    ],
+    blocos: [{ h: 'Dicas', itens: ['Quer lucrar mais? Guarde os **baldes de leite** para fazer **queijo** (veja abaixo), que vale bem mais.'] }],
+  },
+
+  { id: 'queijo', icon: 'fa-cheese', cor: 'c4', titulo: 'Queijeiro (avançado)',
+    sub: 'Transforme o leite em queijo curado e venda no mercado de queijos, onde o preço sobe e desce.',
+    precisa: ['Baldes de leite (do Fazendeiro)', 'Ingredientes no **WalMart**: sal **R$ 10**, sal grosso **R$ 10**, fermento lático **R$ 10**, coalho **R$ 20**, cloreto de cálcio **R$ 20**', 'Uma **casa** com a **Mesa de queijo** (R$ 15.000) e uma **Prateleira** (R$ 30.000, 25 queijos), da loja de móveis'],
+    tiles: [
+      { t: '🧀 Gorgonzola', v: '2 baldes de leite · 2 fermento · 1 coalho · 2 sal<br>Curado vende até **R$ 450**' },
+      { t: '🧀 Canastra', v: '2 baldes de leite · 1 coalho · 2 sal grosso<br>Curado vende até **R$ 380**' },
+      { t: '🧀 Cheddar', v: '2 baldes de leite · 2 fermento · 1 cloreto · 1 coalho · 2 sal<br>Curado vende até **R$ 354**' },
+      { t: '🧀 Minas Frescal', v: '2 baldes de leite · 2 fermento · 1 coalho · 2 sal · 1 cloreto<br>Curado vende até **R$ 330**' },
+    ],
+    passos: [
+      ['Fabricar', 'Na **Mesa de queijo**, aperte **G** para escolher a receita e **E** para fabricar (10 segundos). A mesa guarda até **8 queijos**.'],
+      ['Descansar', 'O queijo fica **5 minutos** na mesa. Depois aperte **H** para retirar.'],
+      ['Curar', 'Na **Prateleira**, aperte **G** para guardar o queijo. Ele leva **4 horas** para curar. O anel na tela mostra quanto falta.'],
+      ['Retirar', 'Quando o anel ficar verde, aperte **H** para pegar o **queijo curado**.'],
+      ['Vender', 'Vá na **Venda de Queijos** (blip no mapa) e aperte **E**. O tablet mostra o preço de cada queijo e um **gráfico** das últimas horas.'],
+    ],
+    blocos: [{ h: 'Dicas', itens: [
+      'O preço de cada queijo **sobe e desce** em ciclos de 12 a 15 horas, entre **R$ 150** e o máximo dele.',
+      'Olhe o gráfico: se está **subindo**, segure; se está **no topo e começou a descer**, venda.',
+      'A cura conta o tempo real: você pode guardar, sair e voltar depois.',
+    ]}],
+  },
+
+  { id: 'caminhoneiro', icon: 'fa-truck', cor: 'c6', titulo: 'Caminhoneiro',
+    sub: 'Alugue um caminhão e faça fretes pela cidade. Quanto mais longe, mais paga.',
+    precisa: ['Dinheiro para o **aluguel** do caminhão (padrão **R$ 2.000**, o dono do depósito define o preço)'],
+    passos: [
+      ['Alugar o caminhão', 'Vá até a **central de caminhões no porto** e aperte **E** para alugar.'],
+      ['Pegar uma carga', 'Dentro do caminhão, aperte **F6** e escolha uma carga.'],
+      ['Entregar', 'Siga o GPS até o pátio, carregue e descarregue (**E**) e receba o frete. Pode pegar outra carga no **F6**.'],
+      ['Devolver', 'Quando terminar, volte à central e devolva o caminhão no ponto de devolução.'],
+    ],
+    tiles: [{ t: '💵 Pagamento', v: 'De **R$ 700 a R$ 1.000 por km** de distância entre a carga e a entrega.' }],
+    blocos: [{ h: 'Dicas', itens: [
+      'Faça várias cargas seguidas antes de devolver: o aluguel é pago uma vez só.',
+      'Caminhão não é fuga válida: não use em ação ilegal.',
+    ]}],
+  },
+
+  { id: 'entregador', icon: 'fa-motorcycle', cor: 'c1', titulo: 'Entregador',
+    sub: 'Pegue lanches nos restaurantes e entregue para os clientes. Qualquer um pode fazer, não precisa pegar emprego.',
+    precisa: ['Celular com o app **Entregador**', 'A **bag de entregador** vestida (roupa, no lugar do colete)', 'Um veículo (moto é o ideal)'],
+    passos: [
+      ['Ficar online', 'Vista a bag, abra o app **Entregador** no celular e fique **online**. Se tirar a bag, você fica offline sozinho.'],
+      ['Aceitar o pedido', 'Quando chegar um pedido, aperte **Y** para abrir e aceitar. O primeiro entregador que aceitar leva.'],
+      ['Buscar o lanche', 'Vá até o restaurante marcado e pegue o pedido com o cozinheiro.'],
+      ['Entregar', 'Leve até o cliente. O dinheiro cai no **saldo do app**; faça o **saque** para mandar para o banco.'],
+    ],
+    tiles: [
+      { t: '💵 Pagamento', v: '**R$ 800** por entrega + **R$ 300 por km** + chance de gorjeta (R$ 20 a R$ 80).' },
+      { t: '⭐ Níveis', v: 'A cada **10 entregas** você sobe de nível: **+10%**, **+20%** e **+30%** em cada corrida.' },
+    ],
+  },
+
+  { grupo: 'Empregos com salário', id: 'salario', icon: 'fa-briefcase', cor: 'c3', titulo: 'Empregos com contratação',
+    sub: 'Esses empregos não estão na agência: você é contratado pelo dono ou gerente, dentro do jogo.',
+    tiles: [
+      { t: '👮 Polícia / PRF', v: 'Patrulha, abordagens e atendimento de roubos.' },
+      { t: '🚦 Detran', v: 'Trânsito, autoescola e documentos.' },
+      { t: '🚑 SAMU', v: 'Socorro e atendimento no hospital.' },
+      { t: '🔧 Mecânica · Pitstop · Truck', v: 'Conserto, tuning e peças. Cobram pelo tablet de faturas (**F4**).' },
+      { t: '🚗 Concessionária', v: 'Venda de carros pelo tablet (**F4**).' },
+    ],
+    blocos: [
+      { h: 'Como funciona o salário', itens: [
+        'O salário cai a cada **40 minutos**, só para quem está **online e com o ponto aberto** (em serviço).',
+        '**Polícia, Detran e SAMU** recebem do **governo**: o salário sempre cai.',
+        '**Oficinas e concessionária** pagam do **cofre da empresa**: se o cofre estiver vazio, não paga.',
+        'Nas oficinas, cada nota paga rende **25%** para o mecânico e **35%** para o cofre da empresa.',
+      ]},
+      { h: 'Como entrar', itens: [
+        'Procure a empresa dentro do jogo e fale com o **dono ou gerente**. Contratação só acontece no jogo.',
+        'Saiu de uma organização? Fica **7 dias** sem poder entrar em outra legal.',
+      ]},
+    ],
+  },
+
+  { id: 'lojinhas', icon: 'fa-store', cor: 'c4', titulo: 'Dono de Lojinha',
+    sub: 'Compre uma lojinha, mantenha o estoque e lucre com cada venda.',
+    blocos: [
+      { h: 'Como funciona', itens: [
+        'O dono **repõe o estoque** pelo tablet da loja (aba **Estoque**), pagando o preço de reposição com o caixa da loja.',
+        'Cada cliente que compra paga o preço de venda. A diferença é o **lucro** da loja.',
+        'Exemplo: a **mochila** custa **R$ 1.800** para repor e é vendida por **R$ 2.500**: **R$ 700** de lucro por unidade.',
+        'Loja sem estoque não vende nada. Fique de olho nos itens que acabam.',
+      ]},
+    ],
+  },
+];
+</script>
+<script src="app.js"></script>
+</body>
+</html>
