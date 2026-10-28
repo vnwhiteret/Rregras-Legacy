@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Manual Bennys — Legacy RP</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  <div class="traffic"><i></i><i></i><i></i></div>
+  <a class="brand" href="#inicio"><span class="logo"><i class="fa-solid fa-paint-roller"></i></span><span>Manual Bennys<small>Legacy RP · uso interno</small></span></a>
+  <nav class="pages"><a href="index.html">Regras</a><a href="#inicio" class="on">Manual</a></nav>
+  <div class="grow"></div>
+  <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar no manual..." autocomplete="off"></label>
+</header>
+
+<div class="layout">
+  <aside id="side"></aside>
+  <main>
+    <div class="hero" id="inicio">
+      <h1>🎨 Manual Bennys</h1>
+      <p>Tudo o que o mecânico da Bennys precisa saber: turno, customização, cobrança no F6, suspensão a ar, guincho e regras da oficina.</p>
+      <div class="quick" id="quick"></div>
+    </div>
+    <div id="content"></div>
+    <div class="empty" id="empty"><i class="fa-solid fa-magnifying-glass" style="font-size:28px;margin-bottom:10px;display:block"></i>Nada encontrado.</div>
+    <footer>Legacy RP · Manual interno Bennys. Dúvida? Fale com o seu superior.</footer>
+  </main>
+</div>
+
+<script>
+// Manual da Bennys. Para editar: mude o texto aqui. **texto** vira negrito.
+const SECOES = [
+  { grupo: 'Comece aqui', id: 'turno', icon: 'fa-clock', cor: 'c1', titulo: 'Começando o turno', tiles: [
+    { t: '🕒 Bater o ponto', v: 'Entre **em serviço** antes de trabalhar. O salário cai a cada **40 minutos**, só com o ponto aberto.' },
+    { t: '🏦 De onde sai o salário', v: 'Do **cofre da Bennys**. Cofre vazio = ninguém recebe. Cada serviço cobrado enche o cofre.' },
+    { t: '👕 Uniforme', v: 'Pegue a **roupa de trabalho** no vestiário da oficina.' },
+  ], blocos: [{ h: 'O que a Bennys faz', itens: [
+    'A Bennys é a oficina de **customização**: pintura, rodas, kits de lataria, luzes, neon, insulfilm, interior e som.',
+    'Também faz **suspensão a ar**, **conserto de lataria**, **limpeza** e **guincho**.',
+    'Motor, turbo, câmbio e peças de desempenho são com a **Pitstop** (gasolina) e a **Truck Diesel** (diesel).',
+  ]}]},
+
+  { grupo: 'Serviços', id: 'customizacao', icon: 'fa-paint-roller', cor: 'c4', titulo: 'Customização', sub: 'Feita nos pontos de customização dentro da Bennys.',
+    passos: [
+      ['Leve o carro ao ponto', 'Entre com o carro do cliente em um dos **pontos de customização** da Bennys. O menu abre quando você está no ponto.'],
+      ['Monte com o cliente', 'Mostre as opções e combine o que vai ser feito **antes** de aplicar.'],
+      ['Aplique', 'Para o mecânico em serviço as peças **não custam nada**: quem paga é o cliente, pela cobrança.'],
+      ['Cobre', 'Cobre pelo menu **F6 → Serviços** (veja abaixo).'],
+    ],
+    tiles: [
+      { t: '🎨 Pintura', v: 'Cor primária e secundária, tipo de pintura, **perolado**, cor das rodas, do painel e do interior.' },
+      { t: '🛞 Rodas', v: 'Esportivas, importadas, off-road, alta classe, Benny’s, rodas de moto e **cor da fumaça** do pneu.' },
+      { t: '🚘 Lataria', v: 'Para-choques, saias, aerofólio, capô, paralamas, teto, grade, escapamento e gaiola.' },
+      { t: '💡 Luzes e extras', v: '**Xenon**, **neon**, **insulfilm**, placa, adesivos, buzina, interior e alto-falantes.' },
+    ],
+    blocos: [{ h: 'Atenção', itens: [
+      'O menu também mostra **Melhorias** (motor, freio, câmbio, turbo). Desempenho é serviço da **Pitstop**: não venda isso como preparação.',
+      'Proibido rodas e suspensão **fora da realidade**.',
+    ]}],
+  },
+
+  { id: 'f6', icon: 'fa-bars', cor: 'c2', titulo: 'Menu F6 e cobrança', sub: 'Aperte F6 em serviço.',
+    tiles: [
+      { t: '🔨 Consertar', v: 'Conserta a **lataria** do carro amassado.' },
+      { t: '🧽 Limpar', v: 'Lava o carro.' },
+      { t: '🚧 Objetos', v: '**Cone** e **caixa de ferramentas** para sinalizar o atendimento na rua.' },
+      { t: '🧾 Serviços', v: 'Escolha os serviços feitos, veja o **total** e envie a cobrança para o cliente próximo.' },
+    ],
+    blocos: [{ h: 'Cobrança', itens: [
+      'No **F6 → Serviços**, selecione **cada serviço** feito. O total aparece embaixo.',
+      'Envie para o cliente que está **perto**. Ele aceita ou recusa na tela.',
+      'De cada cobrança paga: **30%** para você e **70%** para o cofre da Bennys.',
+      'Cobre **sempre** pelo menu. Cobrar por fora ou fazer acordo pessoal = **expulsão**.',
+    ]}],
+  },
+
+  { id: 'suspensao', icon: 'fa-car-side', cor: 'c5', titulo: 'Suspensão a ar', blocos: [{ h: 'Como funciona', itens: [
+    'A Bennys tem o **kit de instalação** e o **airlift** na **Loja Bennys** (só funcionários).',
+    'Instale o kit no carro do cliente. A suspensão fica salva na **placa** do carro.',
+    'Depois de instalada, o cliente controla a altura com **F3** dentro do carro.',
+    'Ensine o cliente a usar e lembre: altura exagerada na rua é suspensão **fora da realidade**.',
+  ]}]},
+
+  { id: 'guincho', icon: 'fa-truck-pickup', cor: 'c6', titulo: 'Guincho e serviço com NPC', blocos: [
+    { h: 'Guincho', itens: [
+      'Pegue o **caminhão plataforma (flatbed)** ou o **guincho** na garagem da Bennys.',
+      'Use para buscar carro quebrado ou batido e trazer para a oficina.',
+      'Veículo da empresa **só para o trabalho**.',
+    ]},
+    { h: 'Serviço com NPC', itens: [
+      'Dentro do **flatbed**, aperte **O** para começar a buscar carros de NPC pela cidade.',
+      'Aperte **O** de novo para parar (espere 5 minutos para cancelar de novo).',
+      'Paga pouco: serve para treinar e para quando a oficina está parada.',
+    ]},
+  ]},
+
+  { id: 'regras', icon: 'fa-scale-balanced', cor: 'c6', titulo: 'Regras da oficina', blocos: [{ h: 'Obrigatório', itens: [
+    'Atendimento por **ordem de chegada**.',
+    'Uniforme **só em serviço**. Em serviço tem que trabalhar.',
+    'Proibido favorecer a si mesmo ou amigos.',
+    'Proibido vender peças ou kits para quem não é da oficina.',
+    'Proibido suspensão e rodas fora da realidade.',
+    'Mantenha a oficina limpa e organizada.',
+    'Organização **neutra**: foi preso ou se envolveu em crime = **expulso na hora**.',
+  ]}]},
+];
+</script>
+<script src="app.js"></script>
+</body>
+</html>
