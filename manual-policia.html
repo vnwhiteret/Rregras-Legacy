@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Manual Polícia — Legacy RP</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  <div class="traffic"><i></i><i></i><i></i></div>
+  <a class="brand" href="#inicio"><span class="logo"><i class="fa-solid fa-shield"></i></span><span>Manual Polícia<small>Legacy RP · uso interno</small></span></a>
+  <nav class="pages"><a href="index.html">Regras</a><a href="#inicio" class="on">Manual</a></nav>
+  <div class="grow"></div>
+  <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar no manual..." autocomplete="off"></label>
+</header>
+
+<div class="layout">
+  <aside id="side"></aside>
+  <main>
+    <div class="hero" id="inicio">
+      <h1>👮 Manual Polícia</h1>
+      <p>Manual de serviço para Polícia, BOPE e PRF: equipamentos, abordagem, prisão, roubos e regras de conduta.</p>
+      <div class="quick" id="quick"></div>
+    </div>
+    <div id="content"></div>
+    <div class="empty" id="empty"><i class="fa-solid fa-magnifying-glass" style="font-size:28px;margin-bottom:10px;display:block"></i>Nada encontrado.</div>
+    <footer>Legacy RP · Manual interno Polícia. Dúvida? Fale com o seu superior.</footer>
+  </main>
+</div>
+
+<script>
+// Manual da Policia. Para editar: mude o texto aqui. **texto** vira negrito.
+const SECOES = [
+  { grupo: 'Comece aqui', id: 'turno', icon: 'fa-clock', cor: 'c1', titulo: 'Começando o turno', tiles: [
+    { t: '🕒 Bater o ponto', v: 'Entre **em serviço** antes de patrulhar. O salário cai a cada **40 minutos** e vem do **governo**.' },
+    { t: '👕 Farda', v: 'Fardado = **em serviço**. Proibido abordar sem farda ou fora do serviço.' },
+    { t: '🎙️ Rádio', v: 'Fale no rádio com **CAPS LOCK**. Algemado ou rendido não usa rádio.' },
+  ], blocos: [{ h: 'Equipamento', itens: [
+    'Pegue armas e equipamentos no **arsenal** da delegacia.',
+    'A **algema** é um item: só Polícia, BOPE e PRF conseguem usar.',
+    'Patrulha de viatura **sempre em dupla**. Sozinho, só de **moto** (e sem levar ninguém na garupa).',
+  ]}]},
+
+  { id: 'f6', icon: 'fa-bars', cor: 'c2', titulo: 'Menu F6', sub: 'Aperte F6 em serviço.',
+    tiles: [
+      { t: '📱 Tablet da Polícia', v: '**Prender**, ver presos, soltar e mudar o tempo (soltar e mudar o tempo só o **cargo máximo**).' },
+      { t: '🧍 Interação com cidadão', v: '**Ver identidade**, **revistar**, **algemar**, **colocar / retirar do veículo**, multar e ver faturas.' },
+      { t: '🚗 Interação com veículo', v: '**Informações do veículo**, buscar placa, **multar veículo**, **apreender** (pátio) e abrir trancado.' },
+      { t: '🚧 Objetos', v: '**Cone**, **barreira** e **tapete de pregos** para bloqueio.' },
+    ],
+  },
+
+  { grupo: 'Ocorrências', id: 'roubos', icon: 'fa-bell', cor: 'c6', titulo: 'Roubos (fila F4)', passos: [
+    ['Aceite a ocorrência', 'Quando um roubo começa, aperte **F4** para abrir a **fila de roubos** e entrar na ocorrência.'],
+    ['Respeite o número', 'O roubo exige **1 policial por bandido**. Podem entrar **até 2 policiais a mais** que os bandidos.'],
+    ['Siga o rastreador', 'Quem entra na ocorrência recebe o **rastreador** do bandido com o dinheiro.'],
+    ['Feche o perímetro', 'Avise que o perímetro está fechado e oriente quem entrar sem querer a sair.'],
+    ['Encerre', 'Rendeu ou acabou o confronto: prenda e apreenda **só itens ilegais e dinheiro sujo**.'],
+  ], tiles: [
+    { t: '💵 Recompensa', v: 'A polícia recebe por ocorrência: lojinha **R$ 3.000** · banco menor **R$ 8.000** · banco central **R$ 15.000**.' },
+  ], blocos: [{ h: 'Regras da ação', itens: [
+    'Roubo é **Fogo e Fuga**: o tiro pode começar no primeiro contato visual.',
+    'Rastreio acabou e os bandidos continuam no local: **gás lacrimogêneo** liberado.',
+    'Helicóptero **só no banco central**.',
+    'Proibido **voltar para a DP** no meio da ação e proibido lootear antes do fim.',
+  ]}]},
+
+  { id: 'abordagem', icon: 'fa-hand', cor: 'c4', titulo: 'Abordagem e fuga', blocos: [
+    { h: 'Motivos de abordagem', itens: [
+      'Vidro escuro · Mascarado · Alta velocidade · Contramão · Direção perigosa (drift, racha, cavalo de pau) · Subir na calçada · Entrar e sair de beco várias vezes.',
+      'Toda abordagem precisa de motivo, e você **é obrigado a falar o motivo**.',
+    ]},
+    { h: 'Fuga', itens: [
+      'Os **3 primeiros minutos** de fuga são limpos. Depois disso pode atirar nos pneus.',
+      'Trocou de carro: perde a proteção dos 3 minutos.',
+      'Parado enrolando na abordagem: **taser** e tiro no pneu liberados.',
+      'Sacou arma na sua frente: **força letal** liberada.',
+      'Carro que fugiu da polícia sem trocar de veículo e de roupa: tiro no pneu **sem abordagem**.',
+    ]},
+    { h: 'Localização', itens: [
+      '**/rf** manda a sua localização (QTH) para os colegas no mapa.',
+    ]},
+  ]},
+
+  { id: 'prisao', icon: 'fa-handcuffs', cor: 'c7', titulo: 'Prisão', passos: [
+    ['Algeme e revise', 'Algeme (item algema), **revise** e apreenda os itens ilegais e o dinheiro sujo.'],
+    ['Leve à delegacia', 'Coloque na viatura e leve até a **delegacia**. Só dá para prender **dentro dela**.'],
+    ['Prenda pelo tablet', 'No **F6 → Tablet da Polícia**, escolha o preso e marque os **motivos**.'],
+    ['Pena', 'Cada motivo vale **10 minutos** (até **10 motivos**). O preso cumpre no **presídio** e sai na delegacia quando acabar.'],
+  ], blocos: [{ h: 'Apreensão', itens: [
+    'Só **item ilegal e dinheiro sujo**. Item legal **nunca**, nem na prisão.',
+    'O celular pode ser recolhido enquanto ele estiver na cela.',
+    'Proibido apreender e liberar a pessoa em seguida.',
+  ]}]},
+
+  { grupo: 'Ferramentas', id: 'ferramentas', icon: 'fa-video', cor: 'c5', titulo: 'Câmeras, helicóptero e drone', blocos: [{ h: 'Equipamentos', itens: [
+    '**Câmeras da cidade (CCTV)**: troque de câmera com **Q** e **E**.',
+    '**Câmera do helicóptero**: use só em ação de banco central. **BACKSPACE** fecha.',
+    '**Drone de reconhecimento**: **BACKSPACE** para a transmissão.',
+  ]}]},
+
+  { id: 'conduta', icon: 'fa-scale-balanced', cor: 'c6', titulo: 'Conduta e proibições', blocos: [{ h: 'Proibido para policial', itens: [
+    'Corrupção, caixa 2 ou cobrar por fora — exoneração e pode dar **ban**.',
+    'Vender equipamento ou arma da polícia — **ban**.',
+    'Ficar de campana esperando bandido.',
+    'Taser para furar pneu ou dentro de carro.',
+    'Modificar viatura.',
+    'Máscara ou tatuagem que esconda a identidade em serviço.',
+    'Tortura, ofensa ou violência sem necessidade.',
+    'Usar arma da polícia sem farda ou de brincadeira.',
+    'Ficar em serviço sem trabalhar.',
+    'Desrespeitar corpo (dançar, selfie etc).',
+  ]}]},
+];
+</script>
+<script src="app.js"></script>
+</body>
+</html>

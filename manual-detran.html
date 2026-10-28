@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Manual Detran — Legacy RP</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  <div class="traffic"><i></i><i></i><i></i></div>
+  <a class="brand" href="#inicio"><span class="logo"><i class="fa-solid fa-traffic-light"></i></span><span>Manual Detran<small>Legacy RP · uso interno</small></span></a>
+  <nav class="pages"><a href="index.html">Regras</a><a href="#inicio" class="on">Manual</a></nav>
+  <div class="grow"></div>
+  <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar no manual..." autocomplete="off"></label>
+</header>
+
+<div class="layout">
+  <aside id="side"></aside>
+  <main>
+    <div class="hero" id="inicio">
+      <h1>🚦 Manual Detran</h1>
+      <p>Manual de serviço do Detran: multas, apreensão, vistoria, legalização de peças e autoescola.</p>
+      <div class="quick" id="quick"></div>
+    </div>
+    <div id="content"></div>
+    <div class="empty" id="empty"><i class="fa-solid fa-magnifying-glass" style="font-size:28px;margin-bottom:10px;display:block"></i>Nada encontrado.</div>
+    <footer>Legacy RP · Manual interno Detran. Dúvida? Fale com o seu superior.</footer>
+  </main>
+</div>
+
+<script>
+// Manual do Detran. Para editar: mude o texto aqui. **texto** vira negrito.
+const SECOES = [
+  { grupo: 'Comece aqui', id: 'turno', icon: 'fa-clock', cor: 'c1', titulo: 'Começando o turno', tiles: [
+    { t: '🕒 Bater o ponto', v: 'Entre **em serviço** no Detran. O salário cai a cada **40 minutos** e vem do **governo**.' },
+    { t: '📋 Menu F6', v: 'Em serviço, aperte **F6** para abrir o **Menu Detran**.' },
+    { t: '🎓 Cargos', v: 'Recruta → Agente → Supervisor → Subdiretor → Diretor.' },
+  ], blocos: [{ h: 'O papel do Detran', itens: [
+    'O Detran cuida do **trânsito e dos documentos**: multas, apreensão, vistoria e legalização de peças.',
+    'Crime, item ilegal e suspeito são com a **Polícia**. Multa e documento de veículo são com o **Detran**.',
+  ]}]},
+
+  { grupo: 'Serviços', id: 'multas', icon: 'fa-receipt', cor: 'c6', titulo: 'Multas', blocos: [
+    { h: 'Como multar', itens: [
+      'No **F6 → Interação com veículo → Multar veículo**, escolha a infração: **leve**, **média**, **grave** ou **multa manual**.',
+      'A multa fica na **placa** do carro. O dono paga depois.',
+      'Veículo com **multa ou IPVA pendente** **não pode ser vendido** até pagar.',
+    ]},
+    { h: 'Consultar', itens: [
+      '**Informações do veículo** mostra dono, valor FIPE, **multas**, **IPVA**, se está **legalizado**, cor e vistoria marcada.',
+      '**Ver identidade** mostra o documento do motorista.',
+    ]},
+  ]},
+
+  { id: 'apreensao', icon: 'fa-truck-pickup', cor: 'c4', titulo: 'Apreensão (pátio)', blocos: [{ h: 'Como apreender', itens: [
+    'No **F6 → Interação com veículo → Apreender veículo**, informe o **motivo**.',
+    'O veículo vai para o **pátio**. Apreenda só com motivo: carro abandonado atrapalhando, estacionado em local proibido, sem documento.',
+    'O dono retira o veículo no pátio.',
+  ]}]},
+
+  { id: 'vistoria', icon: 'fa-clipboard-check', cor: 'c3', titulo: 'Vistoria e legalização', sub: 'Peça modificada (suspensão, roda, turbo, cor) precisa ser legalizada no Detran.',
+    tiles: [
+      { t: '🛞 Suspensão', v: '**R$ 6.000**' },
+      { t: '⚙️ Roda', v: '**R$ 6.000**' },
+      { t: '🌀 Turbo', v: '**R$ 6.000**' },
+      { t: '🎨 Cor', v: '**R$ 4.000**' },
+      { t: '🔁 Transferência', v: '**R$ 2.000**' },
+    ],
+    passos: [
+      ['Agende a vistoria', 'No **F6 → Vistorias**, marque o horário: **11h, 14h, 20h, 22h ou 00h**.'],
+      ['Receba o carro', 'No horário, o cliente traz o carro até o **pátio de vistoria** do Detran.'],
+      ['Legalize', 'No **F6 → Legalizar veículo**, marque **todas as peças** que o carro tem modificadas e legalize de uma vez.'],
+      ['Pagamento', 'O cliente paga cada peça. **40%** do valor fica com o **agente** que fez a vistoria.'],
+    ],
+    blocos: [{ h: 'Dicas', itens: [
+      'Confira a peça **de verdade** no carro antes de legalizar.',
+      'A **transferência** é usada quando o carro muda de dono.',
+    ]}],
+  },
+
+  { id: 'autoescola', icon: 'fa-id-card', cor: 'c2', titulo: 'Autoescola e licenças', tiles: [
+    { t: '📝 Prova teórica', v: '**R$ 500**' },
+    { t: '🚗 Carro', v: '**R$ 2.500**' },
+    { t: '🏍️ Moto', v: '**R$ 3.000**' },
+    { t: '🚚 Caminhão', v: '**R$ 5.000**' },
+    { t: '⛵ Barco', v: '**R$ 5.000**, direto no Detran, sem prova' },
+  ], blocos: [{ h: 'Como funciona', itens: [
+    'O cidadão faz a prova na **autoescola**. O dinheiro vai para o **cofre do Detran**.',
+    'Explique o caminho para quem está chegando na cidade.',
+  ]}]},
+
+  { id: 'objetos', icon: 'fa-road-barrier', cor: 'c5', titulo: 'Blitz e objetos', blocos: [{ h: 'Montando uma blitz', itens: [
+    'No **F6 → Objetos**: **cone**, **cone grande** e **barreira**.',
+    'Monte a blitz em local visível e seguro. Recolha os objetos quando terminar.',
+    'Motoristas que furam a blitz: chame a **Polícia**.',
+  ]}]},
+
+  { id: 'regras', icon: 'fa-scale-balanced', cor: 'c6', titulo: 'Regras do Detran', blocos: [{ h: 'Obrigatório', itens: [
+    'Toda multa e apreensão precisa de **motivo**, e você **é obrigado a falar o motivo**.',
+    'O Detran **não apreende itens** de cidadão, nem legais nem ilegais.',
+    'Uniforme **só em serviço**. Em serviço tem que trabalhar.',
+    'Proibido cobrar por fora ou legalizar peça sem cobrar.',
+    'Organização **neutra**: foi preso ou se envolveu em crime = **expulso na hora**.',
+  ]}]},
+];
+</script>
+<script src="app.js"></script>
+</body>
+</html>

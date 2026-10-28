@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Manual SAMU — Legacy RP</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  <div class="traffic"><i></i><i></i><i></i></div>
+  <a class="brand" href="#inicio"><span class="logo"><i class="fa-solid fa-truck-medical"></i></span><span>Manual SAMU<small>Legacy RP · uso interno</small></span></a>
+  <nav class="pages"><a href="index.html">Regras</a><a href="#inicio" class="on">Manual</a></nav>
+  <div class="grow"></div>
+  <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar no manual..." autocomplete="off"></label>
+</header>
+
+<div class="layout">
+  <aside id="side"></aside>
+  <main>
+    <div class="hero" id="inicio">
+      <h1>🚑 Manual SAMU</h1>
+      <p>Manual de serviço do SAMU: chamados, reanimação, tratamento, fraturas, exames e regras do hospital.</p>
+      <div class="quick" id="quick"></div>
+    </div>
+    <div id="content"></div>
+    <div class="empty" id="empty"><i class="fa-solid fa-magnifying-glass" style="font-size:28px;margin-bottom:10px;display:block"></i>Nada encontrado.</div>
+    <footer>Legacy RP · Manual interno SAMU. Dúvida? Fale com o seu superior.</footer>
+  </main>
+</div>
+
+<script>
+// Manual do SAMU. Para editar: mude o texto aqui. **texto** vira negrito.
+const SECOES = [
+  { grupo: 'Comece aqui', id: 'turno', icon: 'fa-clock', cor: 'c1', titulo: 'Começando o turno', tiles: [
+    { t: '🕒 Bater o ponto', v: 'Entre **em serviço** no hospital. O salário cai a cada **40 minutos** e vem do **governo**.' },
+    { t: '👕 Vestiário', v: 'Aperte **E** no vestiário para pegar a roupa de serviço.' },
+    { t: '💊 Materiais', v: 'Pegue os itens na **Loja do Hospital** (só funcionários).' },
+  ], blocos: [{ h: 'Materiais da loja do hospital', itens: [
+    '**Curativo**, **kit médico**, **desfibrilador**, **morfina**, **adrenalina**, **anestésico**, **analgésico**, **dipirona** e **paracetamol**.',
+    '**Tala**, **gesso** e **tipoia** para fraturas.',
+    '**Bisturi** para cirurgia, **maca** e **cadeira de rodas**.',
+    'Exames: **raio-X** e **ressonância**.',
+  ]}]},
+
+  { grupo: 'Atendimento', id: 'chamados', icon: 'fa-bell', cor: 'c6', titulo: 'Chamados', blocos: [{ h: 'Como chegam', itens: [
+    'Quem morre aperta **G** para chamar o SAMU. Todos os médicos **em serviço** recebem o aviso e o local no mapa por 2 minutos.',
+    'O mesmo jogador só pode chamar de novo depois de **1 minuto**.',
+    'Ninguém socorreu? A pessoa pode desistir depois de **3 minutos** (paga **R$ 2.000**) ou renasce sozinha em **60 minutos**.',
+    'Em **ação** (roubo, troca de tiro) só socorra **depois que a ação acabar**, começando pelos vencedores.',
+  ]}]},
+
+  { id: 'reanimar', icon: 'fa-heart-pulse', cor: 'c6', titulo: 'Reanimação', passos: [
+    ['Chegue no local', 'Siga o blip do chamado. Estacione sem atrapalhar.'],
+    ['Reanime', 'Mire na pessoa com o olhinho (**ALT**) e use o **desfibrilador** ou o **kit médico**.'],
+    ['Vida baixa', 'A pessoa volta com **10%** de vida. Trate os ferimentos ou leve ao hospital se estiver grave.'],
+  ], tiles: [
+    { t: '💵 Por reanimação', v: '**R$ 1.000** para o médico.' },
+    { t: '🧠 Memória', v: 'Reanimado **no local**, a pessoa **lembra** da ação. Renasceu no hospital, **esquece**.' },
+  ]},
+
+  { id: 'tratamento', icon: 'fa-kit-medical', cor: 'c3', titulo: 'Tratamento e remédios', blocos: [
+    { h: 'Tratar ferimentos', itens: [
+      'No olhinho, escolha **Tratar ferimentos**: a vida sobe **5% a cada 1,5 segundo** (uns 30 segundos até 100%). Fique perto.',
+      'Pode parar o tratamento a qualquer hora.',
+    ]},
+    { h: 'Itens em outra pessoa', itens: [
+      'Use **curativo**, **kit médico**, **morfina**, **adrenalina** etc. pelo olhinho na pessoa. O item é gasto.',
+      'Em você mesmo: use o item direto no inventário.',
+    ]},
+    { h: 'Recepção', itens: [
+      'Paciente vivo e machucado pode ser tratado na **recepção** por **R$ 800**.',
+      'O **autoatendimento** do hospital reanima por **R$ 4.000**.',
+    ]},
+  ]},
+
+  { id: 'fraturas', icon: 'fa-bone', cor: 'c4', titulo: 'Fraturas, exames e cirurgia', tiles: [
+    { t: '🦴 Braço', v: 'Trate com **tala**.' },
+    { t: '🦵 Perna', v: 'Trate com **gesso**.' },
+    { t: '🧠 Cabeça e tronco', v: 'Trate com **curativo**.' },
+  ], blocos: [
+    { h: 'Como acontecem', itens: [
+      'Tiro, queda, briga e acidente podem **quebrar** uma parte do corpo.',
+      'Faça o **raio-X** (30 segundos) ou a **ressonância** para ver o que quebrou.',
+    ]},
+    { h: 'Cirurgia', itens: [
+      'Precisa do **bisturi**. Aperte **F** na maca para começar e complete o minigame.',
+      'Cada cirurgia paga o médico e o cofre do hospital.',
+    ]},
+  ]},
+
+  { id: 'regras', icon: 'fa-scale-balanced', cor: 'c6', titulo: 'Regras do hospital', blocos: [{ h: 'Obrigatório', itens: [
+    'Atendimento por **ordem de chegada**.',
+    'Uniforme **só em serviço**. Em serviço tem que trabalhar.',
+    'Siga o **protocolo**: exame antes de tratar fratura.',
+    'Hospital não é ponto de encontro. Peça para estacionarem no estacionamento.',
+    'Proibido máscara, chapéu cobrindo o rosto, sem camisa ou descalço no hospital.',
+    'Organização **neutra**: foi preso ou se envolveu em crime = **expulso na hora**.',
+  ]}]},
+];
+</script>
+<script src="app.js"></script>
+</body>
+</html>
