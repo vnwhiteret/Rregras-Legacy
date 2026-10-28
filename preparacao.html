@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preparação — Legacy RP</title>
+<meta name="description" content="Como funciona a preparação, a manutenção e o conserto dos carros na Legacy RP.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  <div class="traffic"><i></i><i></i><i></i></div>
+  <a class="brand" href="#inicio"><span class="logo"><i class="fa-solid fa-city"></i></span><span>Legacy RP<small>Preparação dos carros</small></span></a>
+  <nav class="pages"><a href="index.html">Regras</a><a href="empregos.html">Empregos</a><a href="preparacao.html" class="on">Preparação</a></nav>
+  <div class="grow"></div>
+  <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar... (ex: radiador, óleo, turbo)" autocomplete="off"></label>
+</header>
+
+<div class="layout">
+  <aside id="side"></aside>
+  <main>
+    <div class="hero" id="inicio">
+      <h1>🔧 Preparação dos Carros</h1>
+      <p>Na Legacy RP o carro funciona como um carro de verdade: tem óleo, água, bateria e peças que gastam. Aqui você entende como cuidar do seu carro, como consertar na rua e como funciona a preparação nas oficinas.</p>
+      <div class="quick" id="quick"></div>
+    </div>
+    <div id="content"></div>
+    <div class="empty" id="empty"><i class="fa-solid fa-magnifying-glass" style="font-size:28px;margin-bottom:10px;display:block"></i>Nada encontrado.</div>
+    <footer>Legacy RP · Dúvida? Abra um ticket no Discord.</footer>
+  </main>
+</div>
+
+<script>
+// Conteudo da preparacao. Para editar: mude o texto aqui. **texto** vira negrito.
+const SECOES = [
+  { grupo: 'Comece aqui', id: 'oficinas', icon: 'fa-warehouse', cor: 'c1', titulo: 'Quem mexe no seu carro', tiles: [
+    { t: '🏁 Pitstop', v: 'Preparação e conserto de **carros e motos a gasolina**: motor, turbo, câmbio, freio, pneu, FuelTech.' },
+    { t: '🚛 Truck Diesel', v: 'Preparação e conserto de **motores diesel** (caminhões e pickups).' },
+    { t: '🛠️ Bennys', v: '**Suspensão a ar** (kit airlift). Depois de instalada, abre com **F3** dentro do carro.' },
+  ], blocos: [
+    { h: 'Como funciona', itens: [
+      'As peças de preparação só são vendidas para os **mecânicos**. Você não compra a peça: você leva o carro na oficina.',
+      'O serviço é feito **dentro da oficina** e você paga a **nota** que o mecânico emite no tablet de faturas.',
+      'Cada peça de preparação instalada gasta **moral** do carro (veja abaixo). Sem moral, não instala.',
+      'Coisas básicas (água, aditivo, óleo para completar, bateria, reparo de radiador) **você mesmo pode fazer** na rua.',
+    ]},
+  ]},
+
+  { id: 'moral', icon: 'fa-star', cor: 'c4', titulo: 'Moral do carro', sub: 'A moral é o "limite de preparação" de cada carro. Ela fica salva na placa.',
+    tiles: [
+      { t: '⭐ Máximo', v: '**250** de moral por carro.' },
+      { t: '🔩 Custo', v: '**25** de moral por peça instalada. Freio: **5 por roda**.' },
+      { t: '🕒 Eventos de Moral', v: 'Todo dia às **11h, 16h, 21h e 23h**. Ganha **+1 de moral por minuto** com o carro no evento.' },
+    ],
+    blocos: [{ h: 'Como conseguir', itens: [
+      'Vá aos **Eventos de Moral** com o carro que você quer preparar. A moral entra na **placa** do carro que está lá.',
+      'Eventos de premiação da staff ou da Pitstop também podem dar moral como prêmio.',
+      'Voltar uma peça para a **original** não gasta moral.',
+      'Planeje: com 250 de moral cabem **10 peças**. Escolha as que mais importam para o seu carro.',
+    ]}],
+  },
+
+  { grupo: 'Manutenção', id: 'manutencao', icon: 'fa-oil-can', cor: 'c3', titulo: 'O que gasta no carro', sub: 'Tudo isso aparece no painel do carro. Cuidar evita o motor quebrar no meio da rua.',
+    tiles: [
+      { t: '🛢️ Óleo', v: 'Até **100 km**: fresco · **200**: bom · **300**: usado · **400**: sujo · **500**: crítico.<br>Troque antes de 500 km.' },
+      { t: '💧 Água do radiador', v: 'Temperatura normal **90°C**. Ferve a **100°C** e perde água. Crítico a **128°C**.' },
+      { t: '🔋 Bateria', v: 'Abaixo de **40%** demora para ligar. Abaixo de **20%** **não liga**. Farol ligado com o motor desligado descarrega.' },
+      { t: '⚙️ Peças que vencem', v: 'Alternador: ~**400 km** · Bomba d’água: ~**600 km** · Motor original: ~**1.000 km** bem cuidado.' },
+    ],
+    blocos: [
+      { h: 'Óleo', itens: [
+        '**Completar o óleo** qualquer um faz: motor **desligado**, abra o capô e use o óleo certo (carro, diesel ou moto). Gasta 1 frasco por litro que falta.',
+        '**Troca de óleo e filtro** só o **mecânico** faz.',
+        'Rodar **sem óleo** quebra o motor quase na hora: pistão, biela, cabeçote e válvulas têm **90%** de chance de quebrar.',
+      ]},
+      { h: 'Água e temperatura', itens: [
+        '**Completar a água** qualquer um faz: motor **desligado**, precisa de **água de radiador + aditivo**.',
+        'Com pouca água o motor esquenta **muito** mais rápido.',
+        'Acima de **118°C** a **junta do cabeçote** pode queimar: sai fumaça e o motor começa a **comer óleo**. Só o mecânico troca a junta.',
+        'Bomba d’água quebrada: a água não circula e o motor esquenta mesmo com o radiador cheio.',
+      ]},
+      { h: 'Bateria e alternador', itens: [
+        'Com o **alternador** bom, a bateria recarrega com o motor ligado.',
+        'Alternador quebrado: a bateria descarrega **mesmo andando**. Troque na oficina.',
+        'A **bateria** você mesmo pode comprar e trocar.',
+      ]},
+    ],
+  },
+
+  { id: 'radiador', icon: 'fa-temperature-high', cor: 'c6', titulo: 'Radiador, gambiarra e reparo', sub: 'Bateu de frente forte? O radiador fura, vaza água e o motor começa a esquentar.',
+    tiles: [
+      { t: '⚠️ 1. Gambiarra', v: '**Qualquer um**, sem item. Volta o radiador para **20%**. Só dá **uma vez**.', cls: 'warn' },
+      { t: '🧰 2. Reparo de radiador', v: 'Item **reparo de radiador**. Volta para **80%**. Qualquer um pode usar.' },
+      { t: '🔧 3. Troca', v: 'Radiador **novo** na oficina, com o mecânico. Volta para **100%**.' },
+    ],
+    passos: [
+      ['Pare e desligue', 'Viu a temperatura subindo ou água vazando? Pare o carro. Andar com o radiador furado ferve a água e pode queimar a junta.'],
+      ['Abra o capô', 'Fique na **frente** do carro com o capô aberto.'],
+      ['Gambiarra (emergência)', 'Mire no carro com o olhinho (**ALT**) e escolha **Fazer Gambiarra no Radiador** (8 segundos). O radiador volta com **20%** de vida: dá para chegar na oficina devagar.'],
+      ['Ou use o reparo', 'Tem o item **reparo de radiador**? Ele funciona quando o radiador está abaixo de **80%** e volta para **80%**.'],
+      ['Complete a água', 'Depois do conserto, com o motor desligado, complete com **água de radiador + aditivo**.'],
+      ['Leve na oficina', 'Radiador que já teve gambiarra **não aceita outra**: só trocando por um novo.'],
+    ],
+    blocos: [{ h: 'Radiador melhor', itens: [
+      'Na oficina dá para colocar **radiador de alumínio 1 fan** (resfria 40% mais) ou **2 fans** (resfria 80% mais). Bom para carro com turbo.',
+    ]}],
+  },
+
+  { id: 'lojas', icon: 'fa-cart-shopping', cor: 'c5', titulo: 'Onde comprar', sub: 'O que você pode comprar sem ser mecânico.',
+    tiles: [
+      { t: '🏁 Balcão da Pitstop', v: 'Reparo de radiador **R$ 600** · Água **R$ 35** · Aditivo **R$ 60**<br>Óleo de carro **R$ 89** · Óleo de moto **R$ 60**<br>Bateria de carro **R$ 600** · Bateria de moto **R$ 300**' },
+      { t: '🚛 Balcão da Truck Diesel', v: 'Reparo de radiador **R$ 600** · Água **R$ 35** · Aditivo **R$ 60**<br>Óleo diesel **R$ 70**<br>Bateria de carro **R$ 600** · Bateria de caminhão **R$ 1.200**' },
+      { t: '🏪 Loja de Peças', v: 'Água **R$ 500** · Aditivo **R$ 500**<br>Óleo carro **R$ 500** · diesel **R$ 600** · moto **R$ 400**<br>Bateria carro **R$ 800** · caminhão **R$ 1.400** · moto **R$ 600**' },
+    ],
+    blocos: [{ h: 'Dicas', itens: [
+      'O **balcão das oficinas é bem mais barato**. A Loja de Peças é para emergência.',
+      'Ande sempre com **1 água, 1 aditivo e 1 reparo de radiador** no porta-malas.',
+      'Use o óleo certo: **carro**, **diesel** ou **moto**.',
+      'O **martelinho** (conserto da lataria) fica com os mecânicos: peça o serviço na oficina.',
+    ]}],
+  },
+
+  { grupo: 'Preparação', id: 'motor', icon: 'fa-gears', cor: 'c2', titulo: 'Peças do motor', sub: 'Instaladas pelo mecânico da Pitstop. Cada uma gasta 25 de moral.',
+    termos: [
+      { n: 'BLOCO BILLET', d: 'Reforça a estrutura do motor para aguentar mais carga. Não dá potência.', ex: [] },
+      { n: 'PISTÕES FORJADOS', d: '**Destaxado**: mais margem para turbo. **Taxado**: mais resposta, exige mais cuidado com temperatura.', ex: [] },
+      { n: 'BIELA FORJADA', d: 'Aguenta mais torque e giro. Não dá potência sozinha.', ex: [] },
+      { n: 'CABEÇOTE', d: '**De rua**: mais fluxo, aguenta 50% mais torque. **De competição**: o dobro do torque, perde resposta em baixa.', ex: [] },
+      { n: 'COMANDO', d: 'Estágios **1, 2 e 3**: mais fôlego em giro alto.', ex: [] },
+      { n: 'VÁLVULAS', d: '**Aço** ou **Titânio**: aguentam mais giro.', ex: [] },
+      { n: 'VOLANTE LEVE', d: 'O motor sobe de giro mais rápido.', ex: [] },
+      { n: 'EMBREAGEM PREPARADA', d: 'Aguenta mais torque sem patinar.', ex: [] },
+      { n: 'ADMISSÃO E ESCAPE', d: '**Filtro de ar**, **coletor de admissão** e **downpipe inox**: o motor respira melhor.', ex: [] },
+      { n: 'BICOS INJETORES', d: '**80, 120, 170 e 240 lb/h**. Turbo maior precisa de bico maior.', ex: [] },
+      { n: 'BOMBA DE COMBUSTÍVEL', d: '**255, 450 e 750 L/h**. Precisa acompanhar os bicos.', ex: [] },
+      { n: 'TURBO', d: '**50/48**, **50/63**, **60/48** e **70/70**. Quanto maior, mais potência e mais esforço nas peças.', ex: [] },
+    ],
+    blocos: [{ h: 'A ordem certa', itens: [
+      'Turbo forte **sem pistão, biela, cabeçote e válvulas preparados** quebra o motor.',
+      'Turbo grande **sem bico e bomba** à altura deixa a mistura pobre e o motor estoura.',
+      'Ordem segura: **internos forjados → bicos e bomba → turbo → acerto na FuelTech**.',
+      'Moto não recebe turbo, bomba preparada nem a segunda bancada de bicos.',
+    ]}],
+  },
+
+  { id: 'transmissao', icon: 'fa-road', cor: 'c4', titulo: 'Câmbio, tração e chão', sub: 'Também instalados na oficina. Cada peça gasta moral (exceto voltar para a original).',
+    tiles: [
+      { t: '⚙️ Câmbio', v: '**Engate rápido**: troca 90% mais rápida. **Automática**: modos Drive, Sport e Manual. **Manual**: só manual com embreagem.' },
+      { t: '📈 Remap de câmbio', v: 'Stage **1 (+10%)**, **2 (+20%)**, **3 (+25%)** sem risco. Stage **4 (+40%)** e **5 (+60%)** podem **quebrar o câmbio** se andar muito tempo no limite.', cls: 'warn' },
+      { t: '🛞 Tração', v: '**Traseira**, **dianteira** ou **4x4**.' },
+      { t: '🔒 Diferencial', v: '**Normal** · **Blocado** (sempre travado, bom para drift) · **Com bloqueio** (liga e desliga no **X**).' },
+      { t: '🛑 Freios', v: '**Cerâmico** +15% · **Aço** +30% · **Carbono** +50% de força.' },
+      { t: '🏎️ Pneus e direção', v: '**Pneu de drift** e **steering lock 50, 60 ou 70°** (mais ângulo de esterço).' },
+    ],
+  },
+
+  { id: 'fueltech', icon: 'fa-microchip', cor: 'c1', titulo: 'FuelTech, dinamômetro e diagnóstico',
+    blocos: [{ h: 'Como funciona', itens: [
+      '**Kit FuelTech** (25 de moral): central para acertar o motor — mistura, ponto, pressão do turbo, controle de tração e **2-step** (segure **ESPAÇO** na largada).',
+      'Um acerto ruim (mistura pobre, ponto adiantado, pressão demais) **desgasta e quebra** o motor.',
+      '**Dinamômetro**: o mecânico mede a potência real do carro (cv) antes e depois da preparação.',
+      '**Tablet OBD**: o mecânico lê a saúde das peças e os erros do carro.',
+      'Motores **swap** (AP, 2JZ, RB26, K20 e outros) também são vendidos para a Pitstop.',
+    ]}],
+  },
+
+  { id: 'volante', icon: 'fa-gamepad', cor: 'c7', titulo: 'Controles no volante', teclas: [
+    { g: 'Dirigindo', l: [['↓','Controle de tração: toque liga · segure 2s desliga'],['↑','Trocar tração'],['X','Bloqueio do diferencial'],['← / →','Modo do câmbio'],['SHIFT / CTRL','Subir / descer marcha'],['ALT','Embreagem'],['ESPAÇO','2-step (com FuelTech)'],['F3','Suspensão a ar']] },
+  ]},
+
+  { grupo: 'Cuidados', id: 'quebras', icon: 'fa-car-burst', cor: 'c6', titulo: 'O que quebra o motor',
+    blocos: [
+      { h: 'Evite', itens: [
+        'Rodar **sem óleo** ou com o óleo **crítico** (mais de 500 km).',
+        'Deixar a temperatura passar de **118°C** (queima a junta) ou **128°C** (crítico).',
+        'Turbo grande em motor **sem preparação** interna.',
+        'Ficar **cortando giro** o tempo todo: as válvulas e bielas sofrem.',
+        'Andar muito tempo no limite com **remap Stage 4 ou 5**.',
+        'Turbo quebrado em uso: o motor **come óleo** rápido.',
+      ]},
+      { h: 'Quando quebrar', itens: [
+        'Motor quebrado não anda: chame o **guincho** ou um mecânico.',
+        'Peças quebradas o mecânico troca ou leva o bloco para a **retífica**.',
+        'Carro perdido ou destruído? Recupere na **garagem do Detran** (aba Recuperar, **R$ 2.000**).',
+      ]},
+    ],
+  },
+];
+</script>
+<script src="app.js"></script>
+</body>
+</html>
