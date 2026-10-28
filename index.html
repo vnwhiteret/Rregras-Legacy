@@ -3,391 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Regras — Legacy RP</title>
-<meta name="description" content="Regras oficiais, teclas e comandos da cidade Legacy RP.">
+<title>Legacy RP</title>
+<meta name="description" content="Regras, ajuda, empregos e preparação de carros da cidade Legacy RP.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="style.css">
+<script>
+  // Links antigos (tudo ficava nesta pagina): manda para a pagina nova certa
+  (function () {
+    var id = location.hash.slice(1);
+    if (!id) return;
+    var regras = ['gerais', 'termos', 'safe', 'acao', 'fuga', 'ilegal', 'desmanche', 'policia', 'orgs', 'punicoes'];
+    var ajuda = ['teclas', 'comandos', 'level', 'vip', 'limpar-cache', 'barra-lateral', 'chao-sumir', 'resgatar-carro'];
+    if (regras.indexOf(id) >= 0) location.replace('regras.html#' + id);
+    else if (ajuda.indexOf(id) >= 0) location.replace('ajuda.html#' + id);
+  })();
+</script>
 </head>
 <body>
 <header class="topbar">
-  <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
   <div class="traffic"><i></i><i></i><i></i></div>
-  <a class="brand" href="#inicio"><span class="logo"><i class="fa-solid fa-city"></i></span><span>Legacy RP<small>Regras da cidade</small></span></a>
-  <nav class="pages"><a href="index.html" class="on">Regras</a><a href="empregos.html">Empregos</a><a href="preparacao.html">Preparação</a></nav>
+  <a class="brand" href="index.html"><span class="logo"><i class="fa-solid fa-city"></i></span><span>Legacy RP<small>Servidor de roleplay</small></span></a>
+  <nav class="pages"><a href="index.html" class="on">Início</a><a href="regras.html">Regras</a><a href="ajuda.html">Ajuda</a><a href="empregos.html">Empregos</a><a href="preparacao.html">Preparação</a></nav>
   <div class="grow"></div>
-  <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar regra... (ex: RDM, fuga, colete)" autocomplete="off"></label>
 </header>
 
-<div class="layout">
-  <aside id="side"></aside>
-  <main>
-    <div class="hero" id="inicio">
-      <h1>📜 Regras da Legacy RP</h1>
-      <p>Ao entrar na cidade você concorda com todas as regras abaixo. Não conhecer a regra não livra da punição. Os exemplos são só exemplos — não são os únicos casos punidos.</p>
-      <div class="quick" id="quick"></div>
-    </div>
-    <div id="content"></div>
-    <div class="empty" id="empty"><i class="fa-solid fa-magnifying-glass" style="font-size:28px;margin-bottom:10px;display:block"></i>Nenhuma regra encontrada.</div>
-    <footer>Legacy RP · Dúvida? Abra um ticket no Discord.</footer>
-  </main>
-</div>
+<main class="home">
+  <div class="hero">
+    <h1>🏙️ Bem-vindo à Legacy RP</h1>
+    <p>Tudo o que você precisa para jogar na cidade: as regras, a ajuda com teclas e problemas, como ganhar dinheiro nos empregos e como cuidar e preparar o seu carro.</p>
+  </div>
 
-<script>
-// Conteudo das regras. Para editar: mude o texto aqui. **texto** vira negrito.
-const SECOES = [
-  { grupo: 'Regras', id: 'gerais', icon: 'fa-handshake', cor: 'c1', titulo: 'Regras Gerais', blocos: [
-    { h: 'Conduta', itens: [
-      'Respeito é obrigatório. Racismo, homofobia, machismo ou qualquer preconceito = **banimento**.',
-      'Proibido hack, mod menu, macro, auto-farm ou anti-AFK.',
-      'Achou bug? Reporte no ticket. Usar bug a seu favor = **banimento**.',
-      'Proibido vender, comprar ou trocar qualquer coisa da cidade por dinheiro real.',
-      'Proibido divulgar outros servidores ou criar Discord por fora para juntar players.',
-      'Proibido doar dinheiro, veículo ou item para outro player (nem na despedida). Advertência para **os dois**.',
-      'Proibido calote em venda ou serviço combinado na hora. Empréstimo e fiado são por sua conta.',
-    ]},
-    { h: 'Imersão', itens: [
-      'Proibido sair do RP. Nada de falar "ADM", "staff", "ban", "RDM", "tô gravando" dentro da cidade.',
-      'Problema numa ação? Termina o RP e resolve no ticket.',
-      'Morto ou desmaiado não fala nem escuta.',
-      'Proibido personagem bugado/deformado, roupa transparente ou capacete fora da moto.',
-      'Proibido Fake Polícia, Fake Mecânico, Fake Médico.',
-    ]},
-    { h: 'Personagem', itens: [
-      'Nome e sobrenome reais (ex.: Luiz Batista, Ana Martins).',
-      'Proibido nome com duplo sentido, palavrão ou conotação sexual. Pode dar reset do personagem.',
-    ]},
-  ]},
-  { id: 'termos', icon: 'fa-book-open', cor: 'c2', titulo: 'Termos do RP', sub: 'O que cada sigla significa e exemplos do que é proibido.', termos: [
-    { n: 'AMOR À VIDA', d: 'Aja como quem tem medo de morrer.', ex: ['Reagir com arma na cara', 'Pedir para morrer', 'Pular de ponte para fugir', 'Pular de carro em alta velocidade'] },
-    { n: 'POWER GAMING', d: 'Fazer o que seria impossível na vida real.', ex: ['Subir morro sem trilha com carro de rua', 'Jogar o carro na água', 'Capotar feio e seguir normal', 'Correr com 2+ pneus furados', 'Chutar alguém de cima da moto', 'Animação algemado'] },
-    { n: 'META GAMING', d: 'Usar informação de fora do RP.', ex: ['Achar alguém pela live', 'Reconhecer mascarado pela voz', 'Reconhecer pelo ID sem conhecer'] },
-    { n: 'RDM', d: 'Matar sem motivo de RP.', ex: ['Matar porque "acha" que foi ele', 'Matar sem a vítima saber da intenção', 'Matar por dedo do meio'] },
-    { n: 'VDM', d: 'Usar o carro como arma.', ex: ['Atropelar de propósito', 'Jogar o carro em moto/bike', 'Fechar entrada de ação com carro'] },
-    { n: 'COMBAT LOG', d: 'Sair do jogo para fugir de ação, abordagem ou prisão = **banimento**.', ex: [] },
-    { n: 'EMBOSCADA', d: 'Armadilha de má fé.', ex: ['Marcar venda e roubar', 'Se render e atirar depois', 'Chamar mecânico/médico para roubar'] },
-    { n: 'FORÇAR RP', d: 'Criar ação do nada.', ex: ['Passar na frente da DP para chamar polícia', 'Provocar sem motivo'] },
-    { n: 'DARK RP', d: 'Tortura, abuso, assédio, pedofilia ou preconceito = **banimento**.', ex: [] },
-    { n: 'LOOT INDEVIDO', d: 'Proibido lootear corpo de ação que você não participou. Achou alguém ferido? Chame o socorro.', ex: [] },
-  ]},
-  { id: 'safe', icon: 'fa-shield-halved', cor: 'c3', titulo: 'Zonas Safe, Morte e Proibições', blocos: [
-    { h: 'Zonas safe', itens: [
-      '**Locais:** Hospital, Delegacia, Concessionária, Mecânicas (Mecânica, Pitstop, Truck), Agência de Empregos e Garagens.',
-      'Na safe é proibido qualquer ação ilegal ou troca de tiro.',
-      'Proibido usar máscara, fazer baderna ou som alto na safe.',
-      '**Proibido fugir para dentro da safe** — fuga para safe não salva ninguém.',
-    ]},
-    { h: 'Morte e memória', itens: [
-      'Morreu ou desmaiou? **Esquece tudo** da ação e de quem estava nela.',
-      'Só lembra se o médico te reanimar **no local**.',
-      'Proibido voltar para a mesma ação depois de morto, dos dois lados.',
-      'Proibido se vingar de quem te matou.',
-    ]},
-    { h: 'Proibido na cidade', itens: [
-      '**Assaltar jogadores.** Só pode roubar estabelecimentos.',
-      '**Sequestro e refém.** Nenhum tipo.',
-      'Roubar helicóptero ou avião.',
-      'Usar veículo de emprego (caminhão, guincho, viatura, ambulância) em ação ilegal.',
-      'Pegar veículo de emprego sem ser do emprego.',
-      'Pousar/decolar aeronave em lugar irreal.',
-    ]},
-  ]},
-  { id: 'acao', icon: 'fa-gun', cor: 'c6', titulo: 'Regras de Ação (Roubos)', tiles: [
-    { t: '🏪 Lojinha', v: '**1 a 3** bandidos<br>Só pistola' },
-    { t: '🏦 Banco menor', v: '**2 a 5** bandidos<br>Pistola e SMG' },
-    { t: '🏛️ Banco central', v: '**4 a 8** bandidos<br>Todas as armas · helicóptero liberado' },
-  ], blocos: [
-    { h: 'Quem pode roubar', itens: [
-      'Só **bandido** rouba. Desempregado vira bandido com **/virarbandido**.',
-      'Sem polícia em serviço, sem roubo. O sistema exige **1 policial para cada bandido**.',
-      'A polícia pode entrar com **até 2 policiais a mais** que o número de bandidos.',
-      'Cada local roubado fica **30 minutos** bloqueado.',
-    ]},
-    { h: 'Durante a ação', itens: [
-      'Roubo é **Fogo e Fuga**: o tiro pode começar no primeiro contato visual.',
-      'Metade da equipe dentro, metade fora (ímpar: 1 a mais fora). Comparsas a no máximo **1 quadra**.',
-      'Colete **vestido**. Colete no inventário = punição.',
-      'Proibido arma branca e taser em roubo.',
-      'Proibido ficar dentro do carro durante a ação. O carro é só para a fuga.',
-      'Proibido bloquear entrada/saída com carro ou objeto.',
-      'Proibido usar animação para ter vantagem ou subir em lugar irreal.',
-      'Se a polícia invadir e os comparsas não aparecerem em **5 minutos**, a ação acaba.',
-      'Rastreio acabou e os bandidos continuam no local? Gás lacrimogêneo liberado.',
-      'Com rastreio ativo é proibido se esconder em casa, apartamento ou qualquer interior.',
-      'Caiu ou ficou AFK? Não volta para a ação. Se estava com o dinheiro, volta **só para entregar**.',
-      'Nenhum lado chama reforço depois que a ação começou.',
-      'Helicóptero da polícia só no **banco central**.',
-    ]},
-  ]},
-  { id: 'fuga', icon: 'fa-person-running', cor: 'c4', titulo: 'Fuga, Rendição e Máscara', blocos: [
-    { h: 'Fuga', itens: [
-      'Na abordagem você escolhe: **foge ou obedece**. Ficar parado enrolando libera taser e tiro no pneu.',
-      'Os **3 primeiros minutos** de fuga são limpos. Depois disso a polícia pode atirar nos pneus.',
-      'Trocou de carro? Perde a proteção dos 3 minutos.',
-      'Caminhão não é fuga válida.',
-      'Carro perdeu o controle ou capotou? Desce e escolhe: **rendição ou troca de tiro**.',
-      'Sacar arma na frente da polícia libera força letal na hora.',
-      'Proibido fugir para casa, apartamento, interior ou safe.',
-      'Colocar civil em risco (atropelar, direção perigosa no meio do povo) acaba com a fuga limpa.',
-    ]},
-    { h: 'Rendição', itens: [
-      'Rendeu? Acabou a ação para você. Proibido puxar arma depois.',
-      'Matar quem se rendeu = **RDM**.',
-      'Proibido falsa rendição para distrair enquanto o parceiro chega atirando.',
-      'Rendido ou algemado não usa rádio nem chama reforço.',
-    ]},
-    { h: 'Máscara', itens: [
-      'Máscara esconde **só o rosto e a voz**. Roupa e carro podem ser reconhecidos.',
-      'Fugiu da polícia? Tem que **trocar de carro, mudar a roupa e guardar o veículo**. Se não, tiro no pneu liberado sem abordagem.',
-    ]},
-    { h: 'Perímetro fechado', itens: [
-      'Em ação, a polícia avisa que o perímetro está fechado e orienta quem entrar sem querer a sair.',
-      'Mandado sair 2 vezes e não saiu = advertência.',
-      'Só pode matar no perímetro quem oferecer risco (arma na mão, atropelando).',
-    ]},
-  ]},
-  { id: 'ilegal', icon: 'fa-mask', cor: 'c7', titulo: 'Regras do Ilegal', sub: 'Vale para Motoclub, Máfia e Bandidos.', blocos: [
-    { h: 'Facções', itens: [
-      'Facção nova só com aprovação da staff.',
-      'Guerra entre facções precisa ser avisada à staff **antes**.',
-      'Proibido invadir base de outra facção sem guerra aprovada.',
-      'Proibido vender ou comprar facção — ban para os dois.',
-      'Se alguém da facção for pego com hack, **a facção inteira pode ser banida** como cúmplice. Viu algo? Denuncie.',
-    ]},
-    { h: 'Reforço (QRR)', itens: [
-      'Só pode chamar reforço depois que a ação **já começou** (abordagem, fuga, troca de tiro).',
-      'Proibido usar o reforço para juntar gente e começar uma ação.',
-    ]},
-    { h: 'Ação de rua (abordagem que vira tiro)', itens: [
-      'Bandidos: **2 a 4** (até 2 carros) · Polícia: **2 a 4** (até 2 carros).',
-      'Armas: arma branca, pistola, SMG e fuzil.',
-      'Proibido se esconder em casa/interior e bloquear entrada/saída.',
-      'Proibido campanar (ficar parado escondido esperando alguém passar).',
-    ]},
-  ]},
-  { id: 'desmanche', icon: 'fa-screwdriver-wrench', cor: 'c4', titulo: 'Regras do Desmanche', sub: 'Desmanche é crime: só vale carro que ninguém está usando.', blocos: [
-    { h: 'O que pode', itens: [
-      'Só pode desmanchar carro **abandonado** (parado na rua, sem dono por perto).',
-    ]},
-    { h: 'O que é proibido', itens: [
-      '**Assaltar o player** para pegar o carro dele. Assalto a jogador é proibido na cidade.',
-      'Pegar carro dentro de **zona safe**.',
-      '**Empurrar ou rebocar** carro para fora da zona safe para desmanchar depois.',
-      'Usar **guincho** (veículo de emprego) para levar carro para o desmanche.',
-      '**Forçar, ameaçar ou convencer** alguém a entregar o próprio carro para ser desmanchado.',
-    ]},
-    { h: 'Como funciona', itens: [
-      'Só quem é membro de um **desmanche** (Desmanche 1 a 4) consegue desmanchar.',
-      'Ninguém consegue desmanchar o **próprio carro**.',
-      'Carro de serviço (viatura, ambulância, guincho, caminhão de emprego) não pode ser desmanchado.',
-      'Depois de desmanchado, o carro some da rua — mas o dono **não perde o carro**.',
-    ]},
-    { h: 'Teve o carro roubado ou desmanchado?', itens: [
-      'Vá na **garagem do Detran** (blip "Detran" no mapa) e abra a aba **Recuperar**.',
-      'Escolha o carro e pague **R$ 2.000** (sai do **banco**). O carro volta para você.',
-      'Só dá para recuperar se o carro **não estiver na rua**. Se alguém ainda estiver andando com ele, espere ele sumir ou chame a polícia.',
-      'Perdeu o carro na rua (bateu, largou, esqueceu onde parou)? É o mesmo caminho.',
-    ]},
-  ]},
-  { id: 'policia', icon: 'fa-shield', cor: 'c1', titulo: 'Regras da Polícia', sub: 'Vale para Polícia, BOPE e PRF.', blocos: [
-    { h: 'Deveres', itens: [
-      'Toda abordagem precisa de motivo, e o policial **é obrigado a falar o motivo**.',
-      'Fardado = em serviço. Proibido abordar sem farda ou fora do serviço.',
-      'Policial só pode ser morto se estiver na ação contra você (perseguição, roubo, confronto).',
-    ]},
-    { h: 'Motivos de abordagem', itens: [
-      'Vidro escuro · Mascarado · Alta velocidade · Contramão · Direção perigosa (drift, racha, cavalo de pau) · Subir na calçada · Entrar e sair de beco várias vezes.',
-    ]},
-    { h: 'O cidadão', itens: [
-      'Aceita a revista pessoal e do veículo, ou foge. Proibido ficar discutindo a abordagem.',
-      'Proibido atrapalhar abordagem dos outros.',
-    ]},
-    { h: 'Apreensão', itens: [
-      'A polícia só apreende **item ilegal e dinheiro sujo**. Item legal nunca, nem na prisão.',
-      'Preso pode ter o celular recolhido enquanto estiver na cela.',
-      'Proibido apreender e liberar a pessoa em seguida.',
-      'Proibido lootear arma ou dinheiro sujo antes do fim da ação.',
-    ]},
-    { h: 'Proibido para policial', itens: [
-      'Corrupção, caixa 2 ou cobrar por fora — exoneração e pode dar **ban**.',
-      'Vender equipamento ou arma da polícia — **ban**.',
-      'Patrulhar sozinho de viatura (sozinho só de moto, sem levar ninguém na garupa).',
-      'Ficar de campana esperando bandido.',
-      'Taser para furar pneu ou dentro de carro.',
-      'Modificar viatura.',
-      'Máscara ou tatuagem que esconda a identidade em serviço.',
-      'Tortura, ofensa ou violência sem necessidade.',
-      'Usar arma da polícia sem farda ou de brincadeira.',
-      'Voltar para a DP no meio de uma ação.',
-      'Ficar em serviço sem trabalhar.',
-      'Desrespeitar corpo (dançar, selfie etc) — vale para todos.',
-    ]},
-  ]},
-  { id: 'orgs', icon: 'fa-building', cor: 'c5', titulo: 'Organizações Legais', sub: 'Vale para Mecânica, Pitstop, Truck, Concessionária, Hospital e Lojinhas.', blocos: [
-    { h: 'Geral', itens: [
-      'Atendimento por **ordem de chegada**.',
-      'Uniforme obrigatório **só em serviço**.',
-      'Em serviço tem que trabalhar. Ficar parado em serviço = exoneração.',
-      'Organização legal é **neutra**: foi preso ou se envolveu em crime = **expulso na hora**.',
-      'Proibido favorecer a si mesmo ou amigos, cobrar por fora ou fazer acordo pessoal.',
-      'Veículo da empresa só para o trabalho.',
-      'Contratação só dentro do jogo.',
-      'Saiu de uma organização? Fica **7 dias** sem poder entrar em outra legal.',
-    ]},
-    { h: 'Hierarquia', itens: [
-      '**1 dono e até 3 gerentes** por organização.',
-      'Se o dono sair ou for removido, os gerentes perdem o cargo e a staff escolhe o novo dono.',
-      'Dono inativo, sem recrutar ou desrespeitando = organização recolhida sem aviso.',
-      '**Proibido vender ou comprar organização** — ban para quem vende e quem compra.',
-    ]},
-    { h: 'Inatividade', itens: [
-      '2 dias inativo sem justificar = expulsão.',
-      'Justificou, mas sem data para voltar = expulsão também.',
-    ]},
-    { h: 'Mecânicas', itens: [
-      'Proibido vender peças ou kits para quem não é da oficina.',
-      'Proibido suspensão e rodas fora da realidade.',
-    ]},
-    { h: 'Concessionária', itens: [
-      'Proibido comprar carro no seu nome para guardar ou revender.',
-    ]},
-    { h: 'Hospital', itens: [
-      'Em ação, só socorre **depois que a ação acabar**.',
-      'Proibido máscara, chapéu cobrindo o rosto, sem camisa ou descalço no hospital.',
-      'Hospital não é ponto de encontro. Estacione no estacionamento.',
-      'Ignorar o atendimento do médico = advertência.',
-    ]},
-  ]},
-  { id: 'punicoes', icon: 'fa-scale-balanced', cor: 'c6', titulo: 'Punições e Denúncias', sub: 'A punição é cumprida dentro do jogo, no presídio. O tempo só corre com você online: saiu faltando 10h, volta faltando 10h.', tiles: [
-    { t: '⚠️ 1ª ADV', v: '**24 horas** de prisão', cls: 'warn' },
-    { t: '⚠️ 2ª ADV', v: '**72 horas** de prisão', cls: 'warn' },
-    { t: '⛔ 3ª ADV', v: '**Banimento**', cls: 'ban' },
-  ], blocos: [
-    { h: 'Punições', itens: [
-      'ADV nova **soma** com o tempo que ainda falta.',
-      'Hack, bug, preconceito, combat log, venda por dinheiro real e desrespeito com a staff = **banimento direto**.',
-      'Usou auto-farm ou anti-AFK? A punição vem **dobrada**.',
-      'Banido não volta com outra conta. O sistema liga as contas do mesmo PC e bane a nova também.',
-      'Não empreste sua conta nem jogue na dos outros: se uma for banida, as ligadas a ela também podem ser.',
-    ]},
-    { h: 'Denúncias', itens: [
-      'Só com vídeo no **Medal** ou **YouTube**, com áudio, sem corte e mostrando tudo.',
-      'Prazo: até **24 horas** depois do ocorrido.',
-      'Não aceitamos vídeo editado, incompleto ou denúncia de terceiros.',
-      'Se você também quebrou regra no vídeo, pode ser punido junto.',
-      'Denúncia aberta não pode ser cancelada.',
-      'Forjar denúncia = **banimento**.',
-      'Acusar alguém de hack exige no mínimo **3 provas**.',
-      'A defesa segue as mesmas regras de vídeo.',
-    ]},
-  ]},
-  { grupo: 'Ajuda', id: 'teclas', icon: 'fa-keyboard', cor: 'c4', titulo: 'Teclas', sub: 'Dá para trocar qualquer tecla em ESC → Configurações → Atalhos → FiveM.', teclas: [
-    { g: 'A pé', l: [['F1','Celular'],['F2','Inventário'],['TAB','Hotbar'],['1 a 5','Usar item da hotbar'],['R','Recarregar arma'],['T','Chat'],['ALT','Interagir (olhinho)'],['CTRL','Agachar'],['H','Sentar'],['M','Cruzar os braços'],['Z','Mãos na cabeça'],['B','Apontar o dedo'],['F7','Ver suas faturas']] },
-    { g: 'Porta-malas e porta-luvas', l: [['K','Atrás do carro: porta-malas'],['K','Dentro do carro: porta-luvas']] },
-    { g: 'No carro', l: [['B','Ligar / desligar o motor'],['U','Trancar / destrancar'],['H','Farol'],['G','Cinto de segurança'],['INSERT','Menu de chaves'],['J','Piloto automático'],['PAGE UP/DOWN','Velocidade do piloto'],['SHIFT','Subir marcha'],['CTRL','Descer marcha'],['ALT','Embreagem'],['← / →','Modo do câmbio'],['↑','Trocar tração'],['↓','Controle de tração (segure 2s desliga)'],['X','Bloqueio do diferencial'],['F3','Suspensão a ar']] },
-    { g: 'Voz', l: [['F11','Alcance da voz'],['CAPS LOCK','Falar no rádio']] },
-    { g: 'Empregos', l: [['F4','Tablet do emprego'],['F6','Menu do emprego'],['O','Mecânico: serviço com NPC'],['Y','Entregador: abrir o pedido']] },
-  ]},
-  { id: 'comandos', icon: 'fa-terminal', cor: 'c3', titulo: 'Comandos', comandos: [
-    ['/motor','Liga / desliga o motor'], ['/trancar','Tranca / destranca o carro'], ['/chaves','Menu de chaves'],
-    ['/boombox','Caixa de som / rádio do carro'], ['/waypoints','GPS'], ['/fpsconfig','Painel de FPS'],
-    ['/virarbandido','Entrar pro crime (desempregado)'],
-    ['/meuchar','Painel do personagem: dinheiro, level e VIP'],
-    ['/meulevel','Abre o painel na aba do level'],
-    ['/meuvip','Abre o painel na aba do VIP'],
-  ]},
+  <div class="portal">
+    <a class="door" href="regras.html">
+      <span class="sec-icon c6"><i class="fa-solid fa-scale-balanced"></i></span>
+      <b>Regras</b>
+      <span>Conduta, termos do RP, ações, roubos, polícia, organizações e punições.</span>
+      <em>Leia antes de jogar <i class="fa-solid fa-arrow-right"></i></em>
+    </a>
+    <a class="door" href="ajuda.html">
+      <span class="sec-icon c1"><i class="fa-solid fa-circle-question"></i></span>
+      <b>Ajuda</b>
+      <span>Teclas, comandos, level, VIP e solução de problemas (cache, chão sumindo, carro perdido).</span>
+      <em>Abrir ajuda <i class="fa-solid fa-arrow-right"></i></em>
+    </a>
+    <a class="door" href="empregos.html">
+      <span class="sec-icon c3"><i class="fa-solid fa-briefcase"></i></span>
+      <b>Empregos</b>
+      <span>Passo a passo de cada emprego: o que precisa, como fazer e quanto paga.</span>
+      <em>Ver empregos <i class="fa-solid fa-arrow-right"></i></em>
+    </a>
+    <a class="door" href="preparacao.html">
+      <span class="sec-icon c4"><i class="fa-solid fa-wrench"></i></span>
+      <b>Preparação</b>
+      <span>Manutenção, radiador e gambiarra, onde comprar peças e como funciona a preparação.</span>
+      <em>Ver preparação <i class="fa-solid fa-arrow-right"></i></em>
+    </a>
+  </div>
 
-  { id: 'level', icon: 'fa-chart-line', cor: 'c1', titulo: 'Meu Level', sub: 'Digite /meuchar (ou /meulevel) para ver o seu level, o XP e os prêmios.',
-    tiles: [
-      { t: '⏱️ Online', v: '**+1 XP** a cada **8 minutos** na cidade.' },
-      { t: '💼 Ponto aberto', v: '**+1 XP** com o ponto aberto no Detran, Bennys, Pitstop, Truck Diesel, PRF ou SAMU.' },
-      { t: '🏪 Dono de empresa', v: '**+1 XP** sendo dono de uma lojinha.' },
-    ],
-    blocos: [
-      { h: 'Como funciona', itens: [
-        'São **20 levels**. Cada level pede mais XP que o anterior (de **30** a **750 XP**).',
-        'Subiu de level? Ganha o **prêmio na hora**: dinheiro no banco (de **R$ 5.000** a **R$ 210.000**) ou **moedas** nos levels 5, 7, 9, 13 e 17.',
-        'O XP só conta com você **online**. O painel mostra quanto falta para o próximo XP.',
-      ]},
-      { h: 'Level libera carros na concessionária', itens: [
-        'Até **R$ 300 mil**: sem level · **R$ 300 a 700 mil**: level **3** · **R$ 0,7 a 1,5 milhão**: level **6**',
-        '**R$ 1,5 a 4 milhões**: level **9** · **R$ 4 a 10 milhões**: level **12** · **R$ 10 a 20 milhões**: level **15** · **acima de R$ 20 milhões**: level **18**',
-      ]},
-      { h: 'Quanto tempo leva', itens: [
-        'Level **3**: ~**24 h** online, ou ~**12 h** com o ponto aberto.',
-        'Level **6**: ~**88 h** online, ou ~**44 h** com o ponto aberto.',
-        'Level **9**: ~**220 h** online, ou ~**110 h** com o ponto aberto.',
-        'Trabalhar com o **ponto aberto** dobra a velocidade. Sendo dono de lojinha, fica ainda mais rápido.',
-      ]},
-      { h: 'Comprar level', itens: [
-        'No painel dá para comprar levels com **moedas**: **1 level = 35** · **2 levels = 65** · **3 levels = 90** moedas.',
-        'Level comprado **não paga prêmio** e **zera o XP** do level atual.',
-      ]},
-    ],
-  },
+  <section class="sec">
+    <div class="sec-head"><div class="sec-icon c2"><i class="fa-solid fa-flag-checkered"></i></div><h2>Primeiros passos na cidade</h2></div>
+    <ol class="steps" style="margin-top:12px">
+      <li class="step"><span class="num">1</span><div><div class="st">Leia as regras</div><div class="sd">Principalmente <a href="regras.html#termos"><b>Termos do RP</b></a> e <a href="regras.html#safe"><b>Zonas Safe</b></a>. Não conhecer a regra não livra da punição.</div></div></li>
+      <li class="step"><span class="num">2</span><div><div class="st">Aprenda as teclas</div><div class="sd"><b>F1</b> celular, <b>F2</b> inventário, <b>B</b> liga o carro, <b>U</b> tranca. A lista completa está em <a href="ajuda.html#teclas"><b>Teclas</b></a>.</div></div></li>
+      <li class="step"><span class="num">3</span><div><div class="st">Pegue um emprego</div><div class="sd">Vá na <b>Agência de Empregos</b> e digite <b>/guia</b>: ele te leva de passo em passo. Veja todos em <a href="empregos.html"><b>Empregos</b></a>.</div></div></li>
+      <li class="step"><span class="num">4</span><div><div class="st">Acompanhe o seu personagem</div><div class="sd">Digite <b>/meuchar</b> para ver dinheiro, <b>level</b> e <b>VIP</b>. O level libera carros melhores na concessionária.</div></div></li>
+      <li class="step"><span class="num">5</span><div><div class="st">Deu problema?</div><div class="sd">Veja a <a href="ajuda.html#limpar-cache"><b>Ajuda</b></a> ou abra um <b>ticket</b> no Discord.</div></div></li>
+    </ol>
+  </section>
 
-  { id: 'vip', icon: 'fa-crown', cor: 'c4', titulo: 'Meu VIP', sub: 'Digite /meuchar (ou /meuvip) para ver e ativar os planos.',
-    tiles: [
-      { t: '👑 VIP 40', v: '**R$ 500** a cada 40 min · 40 moedas' },
-      { t: '👑 VIP 60', v: '**R$ 800** a cada 40 min · 60 moedas' },
-      { t: '👑 VIP 80', v: '**R$ 1.200** a cada 40 min · 80 moedas' },
-      { t: '👑 VIP 100', v: '**R$ 1.500** a cada 40 min · 100 moedas' },
-      { t: '👑 VIP 120', v: '**R$ 2.000** a cada 40 min · 120 moedas' },
-      { t: '👑 VIP 140', v: '**R$ 2.500** a cada 40 min · 140 moedas' },
-    ],
-    blocos: [{ h: 'Como funciona', itens: [
-      'O VIP é um **salário extra** que cai no **banco** a cada **40 minutos**, só com você **online**.',
-      'Cada plano dura **30 dias** e é comprado com **moedas**.',
-      'Os planos **somam**: com mais de um ativo, você recebe todos juntos.',
-      'Não dá para renovar um plano que **ainda está ativo**: espere ele vencer.',
-      'O VIP **ajuda**, mas não substitui o emprego: quem trabalha ganha bem mais.',
-    ]}],
-  },
-
-  { grupo: 'Dúvidas', id: 'limpar-cache', icon: 'fa-broom', cor: 'c5', titulo: 'Limpar o cache do FiveM',
-    sub: 'Use quando o jogo trava ao entrar, carro/roupa/mapa não carrega, a textura buga ou a tela fica preta depois de uma atualização da cidade.',
-    passos: [
-      ['Feche o FiveM por completo', 'Abra o Gerenciador de Tarefas (**CTRL + SHIFT + ESC**) e finalize tudo que tiver **FiveM** no nome.'],
-      ['Abra a pasta do FiveM', 'Aperte **WINDOWS + R**, cole `%localappdata%\\FiveM\\FiveM.app\\data` e dê **ENTER**.'],
-      ['Apague só 3 pastas', 'Apague `cache`, `server-cache` e `server-cache-priv`. **Não apague** a `game-storage`: senão o FiveM baixa os arquivos do GTA de novo.'],
-      ['Entre de novo', 'A primeira entrada vai **demorar mais**: o jogo baixa de novo os carros, mapas e roupas da cidade. **Não feche** no meio.'],
-    ],
-    blocos: [{ h: 'Ainda com problema?', itens: ['Abra um ticket no Discord com **print do erro**.'] }],
-  },
-
-  { id: 'barra-lateral', icon: 'fa-display', cor: 'c2', titulo: 'Barra na lateral da tela',
-    sub: 'Apareceu uma barra/faixa na lateral, ou o celular, o inventário e a HUD ficaram cortados ou fora do lugar? Siga na ordem: quase sempre resolve no passo 1 ou 2.',
-    passos: [
-      ['Atalho rápido', 'Aperte **ALT + ENTER** duas vezes (sai e volta da tela cheia). Ou **ALT + TAB** e volte para o jogo.'],
-      ['Resolução igual à do monitor', 'No jogo: **ESC → Configurações → Gráficos**. Tipo de tela **Tela cheia**, resolução **a mesma do seu monitor** (ex.: 1920x1080) e proporção **Automático**.'],
-      ['Escala do Windows em 100%', 'Botão direito na Área de Trabalho → **Configurações de exibição** → **Escala e layout** → **100%**. Reinicie o FiveM depois.'],
-      ['Ultrawide ou dois monitores', 'Deixe o jogo no **monitor principal** e use uma resolução **16:9** (ex.: 2560x1440 ou 1920x1080).'],
-      ['Ainda aparece?', 'Limpe o cache (seção acima) e abra um ticket com **print da tela**.'],
-    ],
-  },
-
-  { id: 'chao-sumir', icon: 'fa-layer-group', cor: 'c7', titulo: 'Chão sumindo / mapa não carrega',
-    sub: 'O chão some, você cai no mapa, prédios e ruas aparecem sem textura ou "derretidos"? É a memória de vídeo cheia: a cidade tem muitos carros e mapas.',
-    passos: [
-      ['Abaixe as texturas', '**ESC → Configurações → Gráficos** → **Qualidade de textura** em Normal ou Alta (**não use Muito Alta**). A barra de **memória de vídeo** no topo não pode passar do limite.'],
-      ['Aumente o orçamento de texturas', '**ESC → Configurações → Gráficos Avançados** → **Orçamento de textura estendido** (Extended Texture Budget) **no máximo**.'],
-      ['Desligue o que pesa', '**Distância de detalhes**, **sombras** e **grama** em Normal. Feche o Chrome, o Discord com vídeo e outros programas.'],
-      ['Caiu no mapa agora?', 'Fique parado uns segundos para o chão carregar. Se cair de vez, **saia e entre** de novo. Perdeu o carro? Veja **Resgatar o carro** abaixo.'],
-      ['Ainda acontece?', 'Atualize o **driver da placa de vídeo** e limpe o cache.'],
-    ],
-  },
-
-  { id: 'resgatar-carro', icon: 'fa-car-on', cor: 'c4', titulo: 'Resgatar o carro', tiles: [
-    { t: '🚗 Perdi, roubaram ou desmancharam', v: 'Vá na **garagem do Detran** (blip Detran) → aba **Recuperar** → escolha o carro.<br>**R$ 2.000** do banco. O carro não some da sua conta.' },
-    { t: '🚔 Foi apreendido', v: 'A Polícia ou o Detran levaram para o **pátio**. Vá ao **pátio de Los Santos** e fique no **marcador laranja**.<br>**R$ 2.000** do banco.' },
-  ], blocos: [{ h: 'Atenção', itens: [
-    'Só dá para resgatar se o carro **não estiver na rua**. Se alguém ainda estiver andando com ele, espere ele sumir ou chame a **Polícia**.',
-    'Tenha o dinheiro no **banco**, não na mão.',
-    'Carro com **multa ou IPVA** atrasado **não pode ser vendido** até pagar no Detran.',
-    'Não apareceu na lista? Abra um ticket com a **placa** do carro.',
-  ]}]},
-];
-</script>
-<script src="app.js"></script>
+  <footer>Legacy RP · Dúvida? Abra um ticket no Discord.</footer>
+</main>
 </body>
 </html>

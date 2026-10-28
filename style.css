@@ -116,3 +116,16 @@ ol.steps { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .step .st { font-weight: 700; font-size: 14px; }
 .step .sd { margin-top: 3px; font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,.78); }
 @media (max-width: 860px) { .pages a { padding: 6px 10px; } }
+
+/* Pagina inicial */
+.home { max-width: 1100px; margin: 0 auto; padding: 28px 32px 60px; }
+.portal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 26px; }
+.door { display: flex; flex-direction: column; gap: 8px; padding: 20px; border-radius: 16px; background: var(--glass); border: 1px solid var(--line);
+  box-shadow: 0 18px 40px rgba(0,0,0,.25); transition: transform 160ms ease, border-color 160ms ease; }
+.door:hover { transform: translateY(-3px); border-color: rgba(252,177,49,.45); }
+.door b { font-size: 18px; font-weight: 800; margin-top: 4px; }
+.door > span:not(.sec-icon) { font-size: 13.5px; line-height: 1.5; color: rgba(255,255,255,.72); flex: 1; }
+.door em { font-style: normal; font-size: 13px; font-weight: 700; color: var(--accent); }
+.step a b, .sd a b { color: var(--accent); }
+@media (max-width: 960px) { .portal { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .portal { grid-template-columns: 1fr; } .home { padding: 18px 16px 50px; } }
