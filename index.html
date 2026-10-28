@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regras — Legacy RP</title>
+<meta name="description" content="Regras oficiais, teclas e comandos da cidade Legacy RP.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --bg: #0e0f13; --glass: rgba(28,28,32,.92); --glass-2: rgba(36,36,42,.9); --line: rgba(255,255,255,.08);
+    --text: rgba(255,255,255,.92); --muted: rgba(255,255,255,.55); --accent: #fcb131; --blue: #0a84ff;
+    --green: #30d158; --red: #ff453a; --card: rgba(255,255,255,.045); --card2: rgba(255,255,255,.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+  body {
+    font-family: "Inter", -apple-system, "Segoe UI", sans-serif; color: var(--text); -webkit-font-smoothing: antialiased;
+    background:
+      radial-gradient(900px 500px at 0% 100%, rgba(243,154,74,.18), transparent 60%),
+      radial-gradient(800px 500px at 100% 0%, rgba(107,91,214,.22), transparent 60%),
+      radial-gradient(700px 500px at 70% 110%, rgba(226,83,109,.14), transparent 60%),
+      var(--bg);
+    background-attachment: fixed; min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  b, strong { color: #fff; font-weight: 700; }
+
+  .topbar { position: sticky; top: 0; z-index: 20; height: 60px; display: flex; align-items: center; gap: 14px; padding: 0 20px;
+    background: rgba(14,15,19,.75); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+  .traffic { display: flex; gap: 7px; } .traffic i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; }
+  .traffic i:nth-child(2) { background: #febc2e; } .traffic i:nth-child(3) { background: #28c840; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 15px; letter-spacing: .2px; }
+  .brand .logo { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: linear-gradient(135deg, #ff9f0a, #ff375f); font-size: 14px; }
+  .brand small { display: block; font-size: 11px; font-weight: 500; color: var(--muted); }
+  .grow { flex: 1; }
+  .search { position: relative; width: min(340px, 40vw); }
+  .search input { width: 100%; height: 36px; padding: 0 12px 0 34px; border-radius: 10px; border: 1px solid var(--line); background: rgba(255,255,255,.06);
+    color: var(--text); font: 500 13.5px "Inter", sans-serif; outline: none; }
+  .search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(252,177,49,.2); }
+  .search i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 13px; }
+  .menu-btn { display: none; width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line); background: var(--card2); color: #fff; font-size: 15px; cursor: pointer; }
+
+  .layout { display: flex; max-width: 1240px; margin: 0 auto; }
+  aside { position: sticky; top: 60px; height: calc(100vh - 60px); width: 250px; flex: none; padding: 18px 12px; overflow-y: auto; border-right: 1px solid var(--line); }
+  .side-title { font-size: 11px; font-weight: 600; color: var(--muted); padding: 10px 10px 6px; text-transform: uppercase; letter-spacing: .5px; }
+  .nav { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; font-size: 13.5px; color: rgba(255,255,255,.8); }
+  .nav i { width: 18px; text-align: center; color: var(--accent); }
+  .nav:hover { background: rgba(255,255,255,.06); } .nav.active { background: rgba(255,255,255,.11); color: #fff; }
+  .nav .count { margin-left: auto; font-size: 11px; color: var(--muted); }
+
+  main { flex: 1; min-width: 0; padding: 28px 32px 80px; }
+  .hero { padding: 26px; border-radius: 18px; margin-bottom: 26px; background: linear-gradient(135deg, rgba(252,177,49,.14), rgba(255,55,95,.08)); border: 1px solid rgba(252,177,49,.22); }
+  .hero h1 { font-size: 28px; font-weight: 800; letter-spacing: -.3px; }
+  .hero p { margin-top: 8px; color: rgba(255,255,255,.75); font-size: 14.5px; line-height: 1.55; max-width: 720px; }
+  .quick { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-top: 18px; }
+  .quick a { display: flex; align-items: center; gap: 10px; padding: 11px 13px; border-radius: 12px; background: rgba(0,0,0,.25); border: 1px solid var(--line); font-size: 13px; font-weight: 600; }
+  .quick a:hover { background: rgba(255,255,255,.08); }
+  .quick i { color: var(--accent); }
+
+  section.sec { margin-bottom: 26px; padding: 22px 24px; border-radius: 16px; background: var(--glass); border: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.25); }
+  .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .sec-icon { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; font-size: 16px; flex: none; }
+  .sec-head h2 { font-size: 19px; font-weight: 800; }
+  .sec-sub { color: var(--muted); font-size: 13px; margin: 2px 0 6px 50px; }
+  .sec h3 { font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .6px; margin: 20px 0 8px; }
+  ul.rules { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  ul.rules li { position: relative; padding: 8px 10px 8px 28px; border-radius: 8px; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.85); }
+  ul.rules li::before { content: ""; position: absolute; left: 11px; top: 15px; width: 6px; height: 6px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
+  ul.rules li:hover { background: rgba(255,255,255,.035); }
+
+  .terms { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; margin-top: 12px; }
+  .term { padding: 14px 16px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
+  .term .tn { font-size: 13px; font-weight: 800; letter-spacing: .4px; color: #fff; }
+  .term .td { font-size: 13.5px; color: rgba(255,255,255,.75); margin-top: 3px; }
+  .term .tx { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .term .tx span { font-size: 12px; padding: 3px 9px; border-radius: 20px; background: rgba(255,69,58,.12); color: #ff9d95; }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 12px; }
+  .tile { padding: 14px 16px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
+  .tile .tt { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .tile .tv { margin-top: 8px; font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.6; }
+  .tile.warn { border-color: rgba(252,177,49,.3); } .tile.ban { border-color: rgba(255,69,58,.35); background: rgba(255,69,58,.07); }
+
+  .keys { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; margin-top: 10px; }
+  .key { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 10px; background: var(--card); border: 1px solid var(--line); font-size: 13.5px; }
+  kbd { min-width: 34px; padding: 4px 8px; border-radius: 7px; text-align: center; font: 700 12px "Inter", sans-serif; color: #fff; white-space: nowrap;
+    background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.07)); border: 1px solid rgba(255,255,255,.18); box-shadow: 0 2px 0 rgba(0,0,0,.4); }
+  code.cmd { font: 700 12.5px ui-monospace, Consolas, monospace; color: var(--accent); background: rgba(252,177,49,.1); padding: 4px 8px; border-radius: 7px; white-space: nowrap; }
+
+  .note { margin-top: 14px; padding: 12px 14px; border-radius: 10px; font-size: 13px; color: rgba(255,255,255,.8); background: rgba(10,132,255,.1); border: 1px solid rgba(10,132,255,.25); }
+  .note i { color: #64b5ff; margin-right: 6px; }
+
+  mark { background: rgba(252,177,49,.35); color: #fff; border-radius: 3px; padding: 0 2px; }
+  .hidden { display: none !important; }
+  .empty { display: none; text-align: center; padding: 60px 0; color: var(--muted); }
+  footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px 0 0; }
+
+  .c1 { background: linear-gradient(160deg, #5ac8fa, #0a84ff); } .c2 { background: linear-gradient(160deg, #a78bfa, #5e5ce6); }
+  .c3 { background: linear-gradient(160deg, #66e08a, #1fa34a); } .c4 { background: linear-gradient(160deg, #ffb86b, #ff7a00); }
+  .c5 { background: linear-gradient(160deg, #6ee7d8, #0f9d8f); } .c6 { background: linear-gradient(160deg, #ff8fa3, #e0245e); }
+  .c7 { background: linear-gradient(160deg, #8e8e93, #48484a); }
+
+  @media (max-width: 860px) {
+    .menu-btn { display: block; }
+    aside { position: fixed; left: 0; top: 60px; z-index: 15; background: rgba(18,18,22,.98); transform: translateX(-100%); transition: transform 200ms ease; width: 260px; }
+    aside.open { transform: none; }
+    main { padding: 18px 16px 60px; }
+    section.sec { padding: 18px 16px; }
+    .sec-sub { margin-left: 0; }
+    .brand small { display: none; }
+    .search { width: auto; flex: 1; }
+    .grow, .traffic { display: none; }
+    .terms { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  <div class="traffic"><i></i><i></i><i></i></div>
+  <a class="brand" href="#inicio"><span class="logo"><i class="fa-solid fa-city"></i></span><span>Legacy RP<small>Regras da cidade</small></span></a>
+  <div class="grow"></div>
+  <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar regra... (ex: RDM, fuga, colete)" autocomplete="off"></label>
+</header>
+
+<div class="layout">
+  <aside id="side"></aside>
+  <main>
+    <div class="hero" id="inicio">
+      <h1>📜 Regras da Legacy RP</h1>
+      <p>Ao entrar na cidade você concorda com todas as regras abaixo. Não conhecer a regra não livra da punição. Os exemplos são só exemplos — não são os únicos casos punidos.</p>
+      <div class="quick" id="quick"></div>
+    </div>
+    <div id="content"></div>
+    <div class="empty" id="empty"><i class="fa-solid fa-magnifying-glass" style="font-size:28px;margin-bottom:10px;display:block"></i>Nenhuma regra encontrada.</div>
+    <footer>Legacy RP · Dúvida? Abra um ticket no Discord.</footer>
+  </main>
+</div>
+
+<script>
+// Conteudo das regras. Para editar: mude o texto aqui. **texto** vira negrito.
+const SECOES = [
+  { id: 'gerais', icon: 'fa-handshake', cor: 'c1', titulo: 'Regras Gerais', blocos: [
+    { h: 'Conduta', itens: [
+      'Respeito é obrigatório. Racismo, homofobia, machismo ou qualquer preconceito = **banimento**.',
+      'Proibido hack, mod menu, macro, auto-farm ou anti-AFK.',
+      'Achou bug? Reporte no ticket. Usar bug a seu favor = **banimento**.',
+      'Proibido vender, comprar ou trocar qualquer coisa da cidade por dinheiro real.',
+      'Proibido divulgar outros servidores ou criar Discord por fora para juntar players.',
+      'Proibido doar dinheiro, veículo ou item para outro player (nem na despedida). Advertência para **os dois**.',
+      'Proibido calote em venda ou serviço combinado na hora. Empréstimo e fiado são por sua conta.',
+    ]},
+    { h: 'Imersão', itens: [
+      'Proibido sair do RP. Nada de falar "ADM", "staff", "ban", "RDM", "tô gravando" dentro da cidade.',
+      'Problema numa ação? Termina o RP e resolve no ticket.',
+      'Morto ou desmaiado não fala nem escuta.',
+      'Proibido personagem bugado/deformado, roupa transparente ou capacete fora da moto.',
+      'Proibido Fake Polícia, Fake Mecânico, Fake Médico.',
+    ]},
+    { h: 'Personagem', itens: [
+      'Nome e sobrenome reais (ex.: Luiz Batista, Ana Martins).',
+      'Proibido nome com duplo sentido, palavrão ou conotação sexual. Pode dar reset do personagem.',
+    ]},
+  ]},
+  { id: 'termos', icon: 'fa-book-open', cor: 'c2', titulo: 'Termos do RP', sub: 'O que cada sigla significa e exemplos do que é proibido.', termos: [
+    { n: 'AMOR À VIDA', d: 'Aja como quem tem medo de morrer.', ex: ['Reagir com arma na cara', 'Pedir para morrer', 'Pular de ponte para fugir', 'Pular de carro em alta velocidade'] },
+    { n: 'POWER GAMING', d: 'Fazer o que seria impossível na vida real.', ex: ['Subir morro sem trilha com carro de rua', 'Jogar o carro na água', 'Capotar feio e seguir normal', 'Correr com 2+ pneus furados', 'Chutar alguém de cima da moto', 'Animação algemado'] },
+    { n: 'META GAMING', d: 'Usar informação de fora do RP.', ex: ['Achar alguém pela live', 'Reconhecer mascarado pela voz', 'Reconhecer pelo ID sem conhecer'] },
+    { n: 'RDM', d: 'Matar sem motivo de RP.', ex: ['Matar porque "acha" que foi ele', 'Matar sem a vítima saber da intenção', 'Matar por dedo do meio'] },
+    { n: 'VDM', d: 'Usar o carro como arma.', ex: ['Atropelar de propósito', 'Jogar o carro em moto/bike', 'Fechar entrada de ação com carro'] },
+    { n: 'COMBAT LOG', d: 'Sair do jogo para fugir de ação, abordagem ou prisão = **banimento**.', ex: [] },
+    { n: 'EMBOSCADA', d: 'Armadilha de má fé.', ex: ['Marcar venda e roubar', 'Se render e atirar depois', 'Chamar mecânico/médico para roubar'] },
+    { n: 'FORÇAR RP', d: 'Criar ação do nada.', ex: ['Passar na frente da DP para chamar polícia', 'Provocar sem motivo'] },
+    { n: 'DARK RP', d: 'Tortura, abuso, assédio, pedofilia ou preconceito = **banimento**.', ex: [] },
+    { n: 'LOOT INDEVIDO', d: 'Proibido lootear corpo de ação que você não participou. Achou alguém ferido? Chame o socorro.', ex: [] },
+  ]},
+  { id: 'safe', icon: 'fa-shield-halved', cor: 'c3', titulo: 'Zonas Safe, Morte e Proibições', blocos: [
+    { h: 'Zonas safe', itens: [
+      '**Locais:** Hospital, Delegacia, Concessionária, Mecânicas (Mecânica, Pitstop, Truck), Agência de Empregos e Garagens.',
+      'Na safe é proibido qualquer ação ilegal ou troca de tiro.',
+      'Proibido usar máscara, fazer baderna ou som alto na safe.',
+      '**Proibido fugir para dentro da safe** — fuga para safe não salva ninguém.',
+    ]},
+    { h: 'Morte e memória', itens: [
+      'Morreu ou desmaiou? **Esquece tudo** da ação e de quem estava nela.',
+      'Só lembra se o médico te reanimar **no local**.',
+      'Proibido voltar para a mesma ação depois de morto, dos dois lados.',
+      'Proibido se vingar de quem te matou.',
+    ]},
+    { h: 'Proibido na cidade', itens: [
+      '**Assaltar jogadores.** Só pode roubar estabelecimentos.',
+      '**Sequestro e refém.** Nenhum tipo.',
+      'Roubar helicóptero ou avião.',
+      'Usar veículo de emprego (caminhão, guincho, viatura, ambulância) em ação ilegal.',
+      'Pegar veículo de emprego sem ser do emprego.',
+      'Pousar/decolar aeronave em lugar irreal.',
+    ]},
+  ]},
+  { id: 'acao', icon: 'fa-gun', cor: 'c6', titulo: 'Regras de Ação (Roubos)', tiles: [
+    { t: '🏪 Lojinha', v: '**1 a 3** bandidos<br>Só pistola' },
+    { t: '🏦 Banco menor', v: '**2 a 5** bandidos<br>Pistola e SMG' },
+    { t: '🏛️ Banco central', v: '**4 a 8** bandidos<br>Todas as armas · helicóptero liberado' },
+  ], blocos: [
+    { h: 'Quem pode roubar', itens: [
+      'Só **bandido** rouba. Desempregado vira bandido com **/virarbandido**.',
+      'Sem polícia em serviço, sem roubo. O sistema exige **1 policial para cada bandido**.',
+      'A polícia pode entrar com **até 2 policiais a mais** que o número de bandidos.',
+      'Cada local roubado fica **30 minutos** bloqueado.',
+    ]},
+    { h: 'Durante a ação', itens: [
+      'Roubo é **Fogo e Fuga**: o tiro pode começar no primeiro contato visual.',
+      'Metade da equipe dentro, metade fora (ímpar: 1 a mais fora). Comparsas a no máximo **1 quadra**.',
+      'Colete **vestido**. Colete no inventário = punição.',
+      'Proibido arma branca e taser em roubo.',
+      'Proibido ficar dentro do carro durante a ação. O carro é só para a fuga.',
+      'Proibido bloquear entrada/saída com carro ou objeto.',
+      'Proibido usar animação para ter vantagem ou subir em lugar irreal.',
+      'Se a polícia invadir e os comparsas não aparecerem em **5 minutos**, a ação acaba.',
+      'Rastreio acabou e os bandidos continuam no local? Gás lacrimogêneo liberado.',
+      'Com rastreio ativo é proibido se esconder em casa, apartamento ou qualquer interior.',
+      'Caiu ou ficou AFK? Não volta para a ação. Se estava com o dinheiro, volta **só para entregar**.',
+      'Nenhum lado chama reforço depois que a ação começou.',
+      'Helicóptero da polícia só no **banco central**.',
+    ]},
+  ]},
+  { id: 'fuga', icon: 'fa-person-running', cor: 'c4', titulo: 'Fuga, Rendição e Máscara', blocos: [
+    { h: 'Fuga', itens: [
+      'Na abordagem você escolhe: **foge ou obedece**. Ficar parado enrolando libera taser e tiro no pneu.',
+      'Os **3 primeiros minutos** de fuga são limpos. Depois disso a polícia pode atirar nos pneus.',
+      'Trocou de carro? Perde a proteção dos 3 minutos.',
+      'Caminhão não é fuga válida.',
+      'Carro perdeu o controle ou capotou? Desce e escolhe: **rendição ou troca de tiro**.',
+      'Sacar arma na frente da polícia libera força letal na hora.',
+      'Proibido fugir para casa, apartamento, interior ou safe.',
+      'Colocar civil em risco (atropelar, direção perigosa no meio do povo) acaba com a fuga limpa.',
+    ]},
+    { h: 'Rendição', itens: [
+      'Rendeu? Acabou a ação para você. Proibido puxar arma depois.',
+      'Matar quem se rendeu = **RDM**.',
+      'Proibido falsa rendição para distrair enquanto o parceiro chega atirando.',
+      'Rendido ou algemado não usa rádio nem chama reforço.',
+    ]},
+    { h: 'Máscara', itens: [
+      'Máscara esconde **só o rosto e a voz**. Roupa e carro podem ser reconhecidos.',
+      'Fugiu da polícia? Tem que **trocar de carro, mudar a roupa e guardar o veículo**. Se não, tiro no pneu liberado sem abordagem.',
+    ]},
+    { h: 'Perímetro fechado', itens: [
+      'Em ação, a polícia avisa que o perímetro está fechado e orienta quem entrar sem querer a sair.',
+      'Mandado sair 2 vezes e não saiu = advertência.',
+      'Só pode matar no perímetro quem oferecer risco (arma na mão, atropelando).',
+    ]},
+  ]},
+  { id: 'ilegal', icon: 'fa-mask', cor: 'c7', titulo: 'Regras do Ilegal', sub: 'Vale para Motoclub, Máfia e Bandidos.', blocos: [
+    { h: 'Facções', itens: [
+      'Facção nova só com aprovação da staff.',
+      'Guerra entre facções precisa ser avisada à staff **antes**.',
+      'Proibido invadir base de outra facção sem guerra aprovada.',
+      'Proibido vender ou comprar facção — ban para os dois.',
+      'Se alguém da facção for pego com hack, **a facção inteira pode ser banida** como cúmplice. Viu algo? Denuncie.',
+    ]},
+    { h: 'Reforço (QRR)', itens: [
+      'Só pode chamar reforço depois que a ação **já começou** (abordagem, fuga, troca de tiro).',
+      'Proibido usar o reforço para juntar gente e começar uma ação.',
+    ]},
+    { h: 'Ação de rua (abordagem que vira tiro)', itens: [
+      'Bandidos: **2 a 4** (até 2 carros) · Polícia: **2 a 4** (até 2 carros).',
+      'Armas: arma branca, pistola, SMG e fuzil.',
+      'Proibido se esconder em casa/interior e bloquear entrada/saída.',
+      'Proibido campanar (ficar parado escondido esperando alguém passar).',
+    ]},
+  ]},
+  { id: 'policia', icon: 'fa-shield', cor: 'c1', titulo: 'Regras da Polícia', sub: 'Vale para Polícia, BOPE e PRF.', blocos: [
+    { h: 'Deveres', itens: [
+      'Toda abordagem precisa de motivo, e o policial **é obrigado a falar o motivo**.',
+      'Fardado = em serviço. Proibido abordar sem farda ou fora do serviço.',
+      'Policial só pode ser morto se estiver na ação contra você (perseguição, roubo, confronto).',
+    ]},
+    { h: 'Motivos de abordagem', itens: [
+      'Vidro escuro · Mascarado · Alta velocidade · Contramão · Direção perigosa (drift, racha, cavalo de pau) · Subir na calçada · Entrar e sair de beco várias vezes.',
+    ]},
+    { h: 'O cidadão', itens: [
+      'Aceita a revista pessoal e do veículo, ou foge. Proibido ficar discutindo a abordagem.',
+      'Proibido atrapalhar abordagem dos outros.',
+    ]},
+    { h: 'Apreensão', itens: [
+      'A polícia só apreende **item ilegal e dinheiro sujo**. Item legal nunca, nem na prisão.',
+      'Preso pode ter o celular recolhido enquanto estiver na cela.',
+      'Proibido apreender e liberar a pessoa em seguida.',
+      'Proibido lootear arma ou dinheiro sujo antes do fim da ação.',
+    ]},
+    { h: 'Proibido para policial', itens: [
+      'Corrupção, caixa 2 ou cobrar por fora — exoneração e pode dar **ban**.',
+      'Vender equipamento ou arma da polícia — **ban**.',
+      'Patrulhar sozinho de viatura (sozinho só de moto, sem levar ninguém na garupa).',
+      'Ficar de campana esperando bandido.',
+      'Taser para furar pneu ou dentro de carro.',
+      'Modificar viatura.',
+      'Máscara ou tatuagem que esconda a identidade em serviço.',
+      'Tortura, ofensa ou violência sem necessidade.',
+      'Usar arma da polícia sem farda ou de brincadeira.',
+      'Voltar para a DP no meio de uma ação.',
+      'Ficar em serviço sem trabalhar.',
+      'Desrespeitar corpo (dançar, selfie etc) — vale para todos.',
+    ]},
+  ]},
+  { id: 'orgs', icon: 'fa-building', cor: 'c5', titulo: 'Organizações Legais', sub: 'Vale para Mecânica, Pitstop, Truck, Concessionária, Hospital e Lojinhas.', blocos: [
+    { h: 'Geral', itens: [
+      'Atendimento por **ordem de chegada**.',
+      'Uniforme obrigatório **só em serviço**.',
+      'Em serviço tem que trabalhar. Ficar parado em serviço = exoneração.',
+      'Organização legal é **neutra**: foi preso ou se envolveu em crime = **expulso na hora**.',
+      'Proibido favorecer a si mesmo ou amigos, cobrar por fora ou fazer acordo pessoal.',
+      'Veículo da empresa só para o trabalho.',
+      'Contratação só dentro do jogo.',
+      'Saiu de uma organização? Fica **7 dias** sem poder entrar em outra legal.',
+    ]},
+    { h: 'Hierarquia', itens: [
+      '**1 dono e até 3 gerentes** por organização.',
+      'Se o dono sair ou for removido, os gerentes perdem o cargo e a staff escolhe o novo dono.',
+      'Dono inativo, sem recrutar ou desrespeitando = organização recolhida sem aviso.',
+      '**Proibido vender ou comprar organização** — ban para quem vende e quem compra.',
+    ]},
+    { h: 'Inatividade', itens: [
+      '2 dias inativo sem justificar = expulsão.',
+      'Justificou, mas sem data para voltar = expulsão também.',
+    ]},
+    { h: 'Mecânicas', itens: [
+      'Proibido vender peças ou kits para quem não é da oficina.',
+      'Proibido suspensão e rodas fora da realidade.',
+    ]},
+    { h: 'Concessionária', itens: [
+      'Proibido comprar carro no seu nome para guardar ou revender.',
+    ]},
+    { h: 'Hospital', itens: [
+      'Em ação, só socorre **depois que a ação acabar**.',
+      'Proibido máscara, chapéu cobrindo o rosto, sem camisa ou descalço no hospital.',
+      'Hospital não é ponto de encontro. Estacione no estacionamento.',
+      'Ignorar o atendimento do médico = advertência.',
+    ]},
+  ]},
+  { id: 'punicoes', icon: 'fa-scale-balanced', cor: 'c6', titulo: 'Punições e Denúncias', sub: 'A punição é cumprida dentro do jogo, no presídio. O tempo só corre com você online: saiu faltando 10h, volta faltando 10h.', tiles: [
+    { t: '⚠️ 1ª ADV', v: '**24 horas** de prisão', cls: 'warn' },
+    { t: '⚠️ 2ª ADV', v: '**72 horas** de prisão', cls: 'warn' },
+    { t: '⛔ 3ª ADV', v: '**Banimento**', cls: 'ban' },
+  ], blocos: [
+    { h: 'Punições', itens: [
+      'ADV nova **soma** com o tempo que ainda falta.',
+      'Hack, bug, preconceito, combat log, venda por dinheiro real e desrespeito com a staff = **banimento direto**.',
+      'Usou auto-farm ou anti-AFK? A punição vem **dobrada**.',
+      'Banido não volta com outra conta. O sistema liga as contas do mesmo PC e bane a nova também.',
+      'Não empreste sua conta nem jogue na dos outros: se uma for banida, as ligadas a ela também podem ser.',
+    ]},
+    { h: 'Denúncias', itens: [
+      'Só com vídeo no **Medal** ou **YouTube**, com áudio, sem corte e mostrando tudo.',
+      'Prazo: até **24 horas** depois do ocorrido.',
+      'Não aceitamos vídeo editado, incompleto ou denúncia de terceiros.',
+      'Se você também quebrou regra no vídeo, pode ser punido junto.',
+      'Denúncia aberta não pode ser cancelada.',
+      'Forjar denúncia = **banimento**.',
+      'Acusar alguém de hack exige no mínimo **3 provas**.',
+      'A defesa segue as mesmas regras de vídeo.',
+    ]},
+  ]},
+  { id: 'teclas', icon: 'fa-keyboard', cor: 'c4', titulo: 'Teclas', sub: 'Dá para trocar qualquer tecla em ESC → Configurações → Atalhos → FiveM.', teclas: [
+    { g: 'A pé', l: [['F1','Celular'],['F2','Inventário'],['TAB','Hotbar'],['1 a 5','Usar item da hotbar'],['R','Recarregar arma'],['T','Chat'],['ALT','Interagir (olhinho)'],['CTRL','Agachar'],['H','Sentar'],['M','Cruzar os braços'],['Z','Mãos na cabeça'],['B','Apontar o dedo'],['F7','Ver suas faturas']] },
+    { g: 'Porta-malas e porta-luvas', l: [['K','Atrás do carro: porta-malas'],['K','Dentro do carro: porta-luvas']] },
+    { g: 'No carro', l: [['B','Ligar / desligar o motor'],['U','Trancar / destrancar'],['H','Farol'],['G','Cinto de segurança'],['INSERT','Menu de chaves'],['J','Piloto automático'],['PAGE UP/DOWN','Velocidade do piloto'],['SHIFT','Subir marcha'],['CTRL','Descer marcha'],['ALT','Embreagem'],['← / →','Modo do câmbio'],['↑','Trocar tração'],['↓','Controle de tração (segure 2s desliga)'],['X','Bloqueio do diferencial'],['F3','Suspensão a ar']] },
+    { g: 'Voz', l: [['F11','Alcance da voz'],['CAPS LOCK','Falar no rádio']] },
+    { g: 'Empregos', l: [['F4','Tablet do emprego'],['F6','Menu do emprego'],['O','Mecânico: serviço com NPC'],['Y','Entregador: abrir o pedido']] },
+  ]},
+  { id: 'comandos', icon: 'fa-terminal', cor: 'c3', titulo: 'Comandos', comandos: [
+    ['/motor','Liga / desliga o motor'], ['/trancar','Tranca / destranca o carro'], ['/chaves','Menu de chaves'],
+    ['/boombox','Caixa de som / rádio do carro'], ['/waypoints','GPS'], ['/fpsconfig','Painel de FPS'],
+    ['/virarbandido','Entrar pro crime (desempregado)'],
+  ]},
+];
+
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const fmt = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/&lt;br&gt;/g, '<br>');
+
+function render() {
+  const side = document.getElementById('side');
+  const quick = document.getElementById('quick');
+  const content = document.getElementById('content');
+  let sideHtml = '<div class="side-title">Regras</div>';
+  let html = '';
+
+  SECOES.forEach((s, idx) => {
+    if (s.id === 'teclas') sideHtml += '<div class="side-title">Ajuda</div>';
+    sideHtml += '<a class="nav" href="#' + s.id + '" data-id="' + s.id + '"><i class="fa-solid ' + s.icon + '"></i>' + s.titulo + '</a>';
+    quick.insertAdjacentHTML('beforeend', '<a href="#' + s.id + '"><i class="fa-solid ' + s.icon + '"></i>' + s.titulo + '</a>');
+
+    html += '<section class="sec" id="' + s.id + '"><div class="sec-head"><div class="sec-icon ' + s.cor + '"><i class="fa-solid ' + s.icon + '"></i></div><h2>' + s.titulo + '</h2></div>';
+    if (s.sub) html += '<div class="sec-sub">' + fmt(s.sub) + '</div>';
+    if (s.tiles) html += '<div class="tiles">' + s.tiles.map((t) => '<div class="tile item ' + (t.cls || '') + '"><div class="tt">' + t.t + '</div><div class="tv">' + fmt(t.v) + '</div></div>').join('') + '</div>';
+    if (s.termos) html += '<div class="terms">' + s.termos.map((t) =>
+      '<div class="term item"><div class="tn">' + t.n + '</div><div class="td">' + fmt(t.d) + '</div>' +
+      (t.ex.length ? '<div class="tx">' + t.ex.map((e) => '<span>' + esc(e) + '</span>').join('') + '</div>' : '') + '</div>').join('') + '</div>';
+    (s.blocos || []).forEach((b) => {
+      html += '<div class="blk"><h3>' + b.h + '</h3><ul class="rules">' + b.itens.map((i) => '<li class="item">' + fmt(i) + '</li>').join('') + '</ul></div>';
+    });
+    (s.teclas || []).forEach((g) => {
+      html += '<div class="blk"><h3>' + g.g + '</h3><div class="keys">' + g.l.map((k) => '<div class="key item"><kbd>' + esc(k[0]) + '</kbd><span>' + esc(k[1]) + '</span></div>').join('') + '</div></div>';
+    });
+    if (s.comandos) html += '<div class="keys">' + s.comandos.map((c) => '<div class="key item"><code class="cmd">' + c[0] + '</code><span>' + esc(c[1]) + '</span></div>').join('') + '</div>' +
+      '<div class="note"><i class="fa-solid fa-circle-info"></i>Comandos são digitados no chat (tecla <b>T</b>).</div>';
+    html += '</section>';
+  });
+
+  side.innerHTML = sideHtml;
+  content.innerHTML = html;
+  document.querySelectorAll('.item').forEach((el) => { el.dataset.raw = el.innerHTML; });
+}
+
+function search(term) {
+  term = term.trim().toLowerCase();
+  const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const nt = norm(term);
+  let any = false;
+  document.querySelectorAll('section.sec').forEach((sec) => {
+    let secHit = false;
+    sec.querySelectorAll('.blk, .tiles, .terms, .keys').forEach((blk) => {
+      let blkHit = false;
+      blk.querySelectorAll('.item').forEach((el) => {
+        el.innerHTML = el.dataset.raw;
+        if (!nt) { el.classList.remove('hidden'); blkHit = true; return; }
+        const hit = norm(el.textContent).includes(nt);
+        el.classList.toggle('hidden', !hit);
+        if (hit) {
+          blkHit = true;
+          const re = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+          el.innerHTML = ('>' + el.dataset.raw + '<').replace(/>([^<]+)</g, (m, txt) => '>' + txt.replace(re, '<mark>$1</mark>') + '<').slice(1, -1);
+        }
+      });
+      blk.classList.toggle('hidden', !blkHit);
+      if (blkHit) secHit = true;
+    });
+    sec.classList.toggle('hidden', !secHit);
+    if (secHit) any = true;
+  });
+  document.getElementById('empty').style.display = any ? 'none' : 'block';
+  document.getElementById('inicio').classList.toggle('hidden', !!nt);
+}
+
+render();
+
+const q = document.getElementById('q');
+q.addEventListener('input', () => search(q.value));
+document.addEventListener('keydown', (e) => {
+  if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+  if (e.key === 'Escape') { q.value = ''; search(''); q.blur(); }
+});
+
+const side = document.getElementById('side');
+document.getElementById('menuBtn').addEventListener('click', () => side.classList.toggle('open'));
+side.addEventListener('click', (e) => { if (e.target.closest('.nav')) side.classList.remove('open'); });
+
+// Destaca no menu a secao que esta na tela
+const navs = () => document.querySelectorAll('.nav');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((en) => {
+    if (en.isIntersecting) navs().forEach((n) => n.classList.toggle('active', n.dataset.id === en.target.id));
+  });
+}, { rootMargin: '-80px 0px -70% 0px' });
+document.querySelectorAll('section.sec').forEach((s) => obs.observe(s));
+</script>
+</body>
+</html>
