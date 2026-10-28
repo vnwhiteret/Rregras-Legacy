@@ -293,6 +293,49 @@ const SECOES = [
     ['/boombox','Caixa de som / rádio do carro'], ['/waypoints','GPS'], ['/fpsconfig','Painel de FPS'],
     ['/virarbandido','Entrar pro crime (desempregado)'],
   ]},
+
+  { grupo: 'Dúvidas', id: 'limpar-cache', icon: 'fa-broom', cor: 'c5', titulo: 'Limpar o cache do FiveM',
+    sub: 'Use quando o jogo trava ao entrar, carro/roupa/mapa não carrega, a textura buga ou a tela fica preta depois de uma atualização da cidade.',
+    passos: [
+      ['Feche o FiveM por completo', 'Abra o Gerenciador de Tarefas (**CTRL + SHIFT + ESC**) e finalize tudo que tiver **FiveM** no nome.'],
+      ['Abra a pasta do FiveM', 'Aperte **WINDOWS + R**, cole `%localappdata%\\FiveM\\FiveM.app\\data` e dê **ENTER**.'],
+      ['Apague só 3 pastas', 'Apague `cache`, `server-cache` e `server-cache-priv`. **Não apague** a `game-storage`: senão o FiveM baixa os arquivos do GTA de novo.'],
+      ['Entre de novo', 'A primeira entrada vai **demorar mais**: o jogo baixa de novo os carros, mapas e roupas da cidade. **Não feche** no meio.'],
+    ],
+    blocos: [{ h: 'Ainda com problema?', itens: ['Abra um ticket no Discord com **print do erro**.'] }],
+  },
+
+  { id: 'barra-lateral', icon: 'fa-display', cor: 'c2', titulo: 'Barra na lateral da tela',
+    sub: 'Apareceu uma barra/faixa na lateral, ou o celular, o inventário e a HUD ficaram cortados ou fora do lugar? Siga na ordem: quase sempre resolve no passo 1 ou 2.',
+    passos: [
+      ['Atalho rápido', 'Aperte **ALT + ENTER** duas vezes (sai e volta da tela cheia). Ou **ALT + TAB** e volte para o jogo.'],
+      ['Resolução igual à do monitor', 'No jogo: **ESC → Configurações → Gráficos**. Tipo de tela **Tela cheia**, resolução **a mesma do seu monitor** (ex.: 1920x1080) e proporção **Automático**.'],
+      ['Escala do Windows em 100%', 'Botão direito na Área de Trabalho → **Configurações de exibição** → **Escala e layout** → **100%**. Reinicie o FiveM depois.'],
+      ['Ultrawide ou dois monitores', 'Deixe o jogo no **monitor principal** e use uma resolução **16:9** (ex.: 2560x1440 ou 1920x1080).'],
+      ['Ainda aparece?', 'Limpe o cache (seção acima) e abra um ticket com **print da tela**.'],
+    ],
+  },
+
+  { id: 'chao-sumir', icon: 'fa-layer-group', cor: 'c7', titulo: 'Chão sumindo / mapa não carrega',
+    sub: 'O chão some, você cai no mapa, prédios e ruas aparecem sem textura ou "derretidos"? É a memória de vídeo cheia: a cidade tem muitos carros e mapas.',
+    passos: [
+      ['Abaixe as texturas', '**ESC → Configurações → Gráficos** → **Qualidade de textura** em Normal ou Alta (**não use Muito Alta**). A barra de **memória de vídeo** no topo não pode passar do limite.'],
+      ['Aumente o orçamento de texturas', '**ESC → Configurações → Gráficos Avançados** → **Orçamento de textura estendido** (Extended Texture Budget) **no máximo**.'],
+      ['Desligue o que pesa', '**Distância de detalhes**, **sombras** e **grama** em Normal. Feche o Chrome, o Discord com vídeo e outros programas.'],
+      ['Caiu no mapa agora?', 'Fique parado uns segundos para o chão carregar. Se cair de vez, **saia e entre** de novo. Perdeu o carro? Veja **Resgatar o carro** abaixo.'],
+      ['Ainda acontece?', 'Atualize o **driver da placa de vídeo** e limpe o cache.'],
+    ],
+  },
+
+  { id: 'resgatar-carro', icon: 'fa-car-on', cor: 'c4', titulo: 'Resgatar o carro', tiles: [
+    { t: '🚗 Perdi, roubaram ou desmancharam', v: 'Vá na **garagem do Detran** (blip Detran) → aba **Recuperar** → escolha o carro.<br>**R$ 2.000** do banco. O carro não some da sua conta.' },
+    { t: '🚔 Foi apreendido', v: 'A Polícia ou o Detran levaram para o **pátio**. Vá ao **pátio de Los Santos** e fique no **marcador laranja**.<br>**R$ 2.000** do banco.' },
+  ], blocos: [{ h: 'Atenção', itens: [
+    'Só dá para resgatar se o carro **não estiver na rua**. Se alguém ainda estiver andando com ele, espere ele sumir ou chame a **Polícia**.',
+    'Tenha o dinheiro no **banco**, não na mão.',
+    'Carro com **multa ou IPVA** atrasado **não pode ser vendido** até pagar no Detran.',
+    'Não apareceu na lista? Abra um ticket com a **placa** do carro.',
+  ]}]},
 ];
 </script>
 <script src="app.js"></script>

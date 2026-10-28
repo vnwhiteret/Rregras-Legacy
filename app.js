@@ -1,5 +1,5 @@
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const fmt = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/&lt;br&gt;/g, '<br>');
+const fmt = (s) => esc(s).replace(/`(.+?)`/g, '<code class="cmd">$1</code>').replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/&lt;br&gt;/g, '<br>');
 
 function render() {
   const side = document.getElementById('side');
