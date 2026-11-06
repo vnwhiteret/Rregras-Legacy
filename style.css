@@ -119,7 +119,7 @@ ol.steps { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 
 /* Pagina inicial */
 .home { max-width: 1100px; margin: 0 auto; padding: 28px 32px 60px; }
-.portal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 26px; }
+.portal { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-bottom: 26px; }
 .door { display: flex; flex-direction: column; gap: 8px; padding: 20px; border-radius: 16px; background: var(--glass); border: 1px solid var(--line);
   box-shadow: 0 18px 40px rgba(0,0,0,.25); transition: transform 160ms ease, border-color 160ms ease; }
 .door:hover { transform: translateY(-3px); border-color: rgba(252,177,49,.45); }

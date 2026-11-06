@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atualizações — Legacy RP</title>
+<meta name="description" content="O que mudou na cidade Legacy RP, da atualização mais nova para a mais antiga.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  <div class="traffic"><i></i><i></i><i></i></div>
+  <a class="brand" href="index.html"><span class="logo"><i class="fa-solid fa-city"></i></span><span>Legacy RP<small>Atualizações</small></span></a>
+  <nav class="pages"><a href="index.html">Início</a><a href="regras.html">Regras</a><a href="ajuda.html">Ajuda</a><a href="empregos.html">Empregos</a><a href="preparacao.html">Preparação</a><a href="atualizacoes.html" class="on">Atualizações</a></nav>
+  <div class="grow"></div>
+  <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar... (ex: drift, casa, pesca)" autocomplete="off"></label>
+</header>
+
+<div class="layout">
+  <aside id="side"></aside>
+  <main>
+    <div class="hero" id="inicio">
+      <h1>📢 Atualizações</h1>
+      <p>O que mudou na cidade, da atualização mais nova para a mais antiga.</p>
+      <div class="quick" id="quick"></div>
+    </div>
+    <div id="content"></div>
+    <div class="empty" id="empty"><i class="fa-solid fa-magnifying-glass" style="font-size:28px;margin-bottom:10px;display:block"></i>Nada encontrado.</div>
+    <footer>Legacy RP · Dúvida? Abra um ticket no Discord.</footer>
+  </main>
+</div>
+
+<script>
+// Para editar: cada atualizacao e uma secao (mais nova em cima). **texto** vira negrito e `texto` vira codigo.
+const SECOES = [
+  { grupo: '06/11', id: 'carros-0611', icon: 'fa-car', cor: 'c4', titulo: 'Carros: velocidade, câmbio e tração', blocos: [
+    { h: 'Velocidade de fábrica', itens: [
+      'Cada carro tem a **velocidade final** e o **número de marchas** de fábrica. Ex.: Jetta TSI **230 km/h** com 6 marchas, Amarok **242 km/h** com 8, Raptor **190 km/h** com 10.',
+      'Para o carro correr mais que o original, faça o **remap de câmbio** na oficina.',
+    ]},
+    { h: 'Câmbio', itens: [
+      '**Manual**: cada toque troca **uma marcha só**, a troca ficou rápida e a última marcha não corta antes da penúltima.',
+      'Carros com **muitas marchas** têm as marchas proporcionais (sem "buraco" entre elas).',
+      '**Corte de giro**: no limite o motor corta e o ponteiro desce e volta.',
+      '**Automático**: com o carro parado, segurar **S** engata a ré na hora.',
+    ]},
+    { h: 'Controle de tração e modo drift', itens: [
+      'Segure **seta para baixo por 1 segundo** para ligar ou desligar o controle de tração.',
+      '**Desligado**: a traseira fica solta para zerinho e drift, e o carro **freia igual** ao ligado.',
+      '**Modo drift** na tecla **L**: precisa do **Flash de Diferencial** instalado na oficina. Ligar o drift desliga o controle de tração junto.',
+    ]},
+  ]},
+  { id: 'ecu-0611', icon: 'fa-fire', cor: 'c6', titulo: 'Oficinas: ECU, pops e chamas', blocos: [
+    { h: 'O que mudou', itens: [
+      'Peças de ECU na loja da **Pitstop** e da **Truck Diesel**: Stage 1, 2 e 3, flashes, straight pipe, silencioso final e adaptador OBD.',
+      'Com **ECU Stage 1** o carro ganha **Pop & Bang**: liga e desliga no **F9**.',
+      'Detalhes de cada peça em [Preparação](preparacao.html#ecu).',
+    ]},
+  ]},
+
+  { grupo: '05/11', id: 'casas-0511', icon: 'fa-building', cor: 'c1', titulo: 'Casas e apartamentos', blocos: [
+    { h: 'O que mudou', itens: [
+      '**Prédios de apartamentos**: uma porta só. Na porta você escolhe o apartamento para **comprar**, **entrar** ou **tocar a campainha**.',
+      'Cada apartamento tem **dono, chave, baú** e **vagas na garagem do prédio**. Só o dono ou quem tem a chave guarda e tira o carro.',
+      '**Casas do mapa (MLO)** à venda, sem teleporte: o dono tranca as portas e define baú e guarda-roupa pelo menu **L**.',
+      'No máximo **30 casas à venda por dinheiro**; as outras são por **moedas**.',
+      'Caiu ou ficou preso dentro de casa? Use `/saircasa`.',
+    ]},
+  ]},
+  { id: 'projectcars-0511', icon: 'fa-screwdriver-wrench', cor: 'c3', titulo: 'Project cars e drops de peças', blocos: [
+    { h: 'Montar um carro', itens: [
+      'Compre o **projeto** no ferro-velho e as **peças** na loja de peças.',
+      'Use o projeto numa **zona de montagem** (veja no mapa) e instale as peças na ordem: **câmbio, motor, escape, freio, roda, porta, capô, porta-malas, banco e pintura**.',
+      'Cada peça tem um minigame de teclas. **Motor e câmbio** entram com a **grua**.',
+      'Terminou? O carro sai pronto com placa própria, ou vai para a garagem.',
+    ]},
+    { h: 'Drops de peças', itens: [
+      'Caixas caem pela cidade em horários marcados. Todo mundo vê o círculo no mapa.',
+      'Quem **abrir primeiro** leva o projeto e o **kit completo** de um carro.',
+    ]},
+  ]},
+  { id: 'pesca-0511', icon: 'fa-fish', cor: 'c5', titulo: 'Pesca na ilha', blocos: [
+    { h: 'O que mudou', itens: [
+      'Nova zona de pesca na **beirada da ilha**: sem barco e com chance de vir **2 peixes** de uma vez.',
+      'A **venda na ilha** paga mais que o porto.',
+      'Os **preços do peixe mudam a cada 40 minutos**. Quem é pescador recebe o aviso.',
+    ]},
+  ]},
+  { id: 'outros-0511', icon: 'fa-list-check', cor: 'c7', titulo: 'Outras mudanças', blocos: [
+    { h: 'O que mudou', itens: [
+      '**Radares** novos e reposicionados pela cidade.',
+      '**Agachar** (CTRL) funciona em primeira pessoa.',
+    ]},
+  ]},
+];
+</script>
+<script src="app.js"></script>
+</body>
+</html>

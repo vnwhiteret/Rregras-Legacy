@@ -14,7 +14,7 @@
   <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
   <div class="traffic"><i></i><i></i><i></i></div>
   <a class="brand" href="index.html"><span class="logo"><i class="fa-solid fa-city"></i></span><span>Legacy RP<small>Tutorial dos empregos</small></span></a>
-  <nav class="pages"><a href="index.html">Início</a><a href="regras.html">Regras</a><a href="ajuda.html">Ajuda</a><a href="empregos.html" class="on">Empregos</a><a href="preparacao.html">Preparação</a></nav>
+  <nav class="pages"><a href="index.html">Início</a><a href="regras.html">Regras</a><a href="ajuda.html">Ajuda</a><a href="empregos.html" class="on">Empregos</a><a href="preparacao.html">Preparação</a><a href="atualizacoes.html">Atualizações</a></nav>
   <div class="grow"></div>
   <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar... (ex: picareta, leite, frete)" autocomplete="off"></label>
 </header>
@@ -76,7 +76,7 @@ const SECOES = [
   },
 
   { id: 'pescador', icon: 'fa-fish', cor: 'c5', titulo: 'Pescador',
-    sub: 'Pesque no lago Alamo Sea e venda os peixes no porto. Não precisa de roupa.',
+    sub: 'Pesque no lago Alamo Sea ou na beirada da ilha e venda no porto ou na ilha. Não precisa de roupa.',
     precisa: ['Vara de pesca', 'Iscas (1 por peixe)', 'Comprados no **mercado de Sandy Shores**', 'Opcional: alugar o **bote** (R$ 5 por minuto)'],
     passos: [
       ['Comprar vara e isca', 'No mercado de Sandy Shores compre a **vara de pesca** e as **iscas**.'],
@@ -85,7 +85,10 @@ const SECOES = [
       ['Devolver o bote', 'Devolva o bote no ponto de aluguel do píer para **parar de cobrar**.'],
       ['Vender', 'No ponto de entrega, aperte **E** e **arraste os peixes** para o balcão. Paga na hora.'],
     ],
-    tiles: [{ t: '🐟 Preço dos peixes', v: 'Tubarão **R$ 200** · Salmão **R$ 100**<br>Arenque / perca **R$ 60** · Anchova / bagre **R$ 55**<br>Sardinha / truta / peixe-relógio **R$ 50**' }],
+    tiles: [
+      { t: '🐟 Preço dos peixes (porto)', v: 'Tubarão **R$ 200** · Salmão **R$ 100**<br>Arenque / perca **R$ 60** · Anchova / bagre **R$ 55**<br>Sardinha / truta / peixe-relógio **R$ 50**<br>Os preços **mudam a cada 40 minutos** (de 70% a 140%). Quem é pescador recebe o aviso.' },
+      { t: '🏝️ Pesca na ilha', v: 'Na **beirada da ilha** não precisa de barco e muitas vezes vem **2 peixes** de uma vez, com mais chance de salmão e tubarão.<br>A **venda na ilha** paga cerca de **50% a mais** que o porto.' },
+    ],
     blocos: [{ h: 'Dicas', itens: [
       'Sardinha é comum. **Salmão e tubarão** são raros e valem mais.',
       'Pescar na margem é de graça: o bote só ajuda a ir para o meio do lago.',

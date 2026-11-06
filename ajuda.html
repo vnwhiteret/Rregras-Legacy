@@ -14,7 +14,7 @@
   <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
   <div class="traffic"><i></i><i></i><i></i></div>
   <a class="brand" href="index.html"><span class="logo"><i class="fa-solid fa-city"></i></span><span>Legacy RP<small>Ajuda e dúvidas</small></span></a>
-  <nav class="pages"><a href="index.html">Início</a><a href="regras.html">Regras</a><a href="ajuda.html" class="on">Ajuda</a><a href="empregos.html">Empregos</a><a href="preparacao.html">Preparação</a></nav>
+  <nav class="pages"><a href="index.html">Início</a><a href="regras.html">Regras</a><a href="ajuda.html" class="on">Ajuda</a><a href="empregos.html">Empregos</a><a href="preparacao.html">Preparação</a><a href="atualizacoes.html">Atualizações</a></nav>
   <div class="grow"></div>
   <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar... (ex: cache, tecla, VIP)" autocomplete="off"></label>
 </header>
@@ -39,7 +39,7 @@ const SECOES = [
   { grupo: 'Controles', id: 'teclas', icon: 'fa-keyboard', cor: 'c4', titulo: 'Teclas', sub: 'Dá para trocar qualquer tecla em ESC → Configurações → Atalhos → FiveM.', teclas: [
     { g: 'A pé', l: [['F1','Celular'],['F2','Inventário'],['TAB','Hotbar'],['1 a 5','Usar item da hotbar'],['R','Recarregar arma'],['T','Chat'],['ALT','Interagir (olhinho)'],['CTRL','Agachar'],['H','Sentar'],['M','Cruzar os braços'],['Z','Mãos na cabeça'],['B','Apontar o dedo'],['F7','Ver suas faturas']] },
     { g: 'Porta-malas e porta-luvas', l: [['K','Atrás do carro: porta-malas'],['K','Dentro do carro: porta-luvas']] },
-    { g: 'No carro', l: [['B','Ligar / desligar o motor'],['U','Trancar / destrancar'],['H','Farol'],['G','Cinto de segurança'],['INSERT','Menu de chaves'],['J','Piloto automático'],['PAGE UP/DOWN','Velocidade do piloto'],['SHIFT','Subir marcha'],['CTRL','Descer marcha'],['ALT','Embreagem'],['← / →','Modo do câmbio'],['↑','Trocar tração'],['↓','Controle de tração (segure 2s desliga)'],['X','Bloqueio do diferencial'],['F3','Suspensão a ar']] },
+    { g: 'No carro', l: [['B','Ligar / desligar o motor'],['U','Trancar / destrancar'],['H','Farol'],['G','Cinto de segurança'],['INSERT','Menu de chaves'],['J','Piloto automático'],['PAGE UP/DOWN','Velocidade do piloto'],['SHIFT','Subir marcha'],['CTRL','Descer marcha'],['ALT','Embreagem'],['← / →','Modo do câmbio'],['↑','Trocar tração'],['↓','Controle de tração (segure 1s liga/desliga)'],['L','Modo drift (precisa do Flash de Diferencial)'],['F9','Pop & Bang (precisa de ECU Stage 1)'],['F5','Trocar o mapa da ECU'],['END','Válvula do escape'],['X','Bloqueio do diferencial'],['F3','Suspensão a ar']] },
     { g: 'Voz', l: [['F11','Alcance da voz'],['CAPS LOCK','Falar no rádio']] },
     { g: 'Empregos', l: [['F4','Tablet do emprego'],['F6','Menu do emprego'],['O','Mecânico: serviço com NPC'],['Y','Entregador: abrir o pedido']] },
   ]},
@@ -51,6 +51,7 @@ const SECOES = [
     ['/meuchar','Painel do personagem: dinheiro, level e VIP'],
     ['/meulevel','Abre o painel na aba do level'],
     ['/meuvip','Abre o painel na aba do VIP'],
+    ['/saircasa','Sai da casa e volta para a porta (se cair ou ficar preso)'],
   ]},
 
   { grupo: 'Personagem', id: 'level', icon: 'fa-chart-line', cor: 'c1', titulo: 'Meu Level', sub: 'Digite /meuchar (ou /meulevel) para ver o seu level, o XP e os prêmios.',

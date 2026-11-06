@@ -14,7 +14,7 @@
   <button class="menu-btn" id="menuBtn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
   <div class="traffic"><i></i><i></i><i></i></div>
   <a class="brand" href="index.html"><span class="logo"><i class="fa-solid fa-city"></i></span><span>Legacy RP<small>Preparação dos carros</small></span></a>
-  <nav class="pages"><a href="index.html">Início</a><a href="regras.html">Regras</a><a href="ajuda.html">Ajuda</a><a href="empregos.html">Empregos</a><a href="preparacao.html" class="on">Preparação</a></nav>
+  <nav class="pages"><a href="index.html">Início</a><a href="regras.html">Regras</a><a href="ajuda.html">Ajuda</a><a href="empregos.html">Empregos</a><a href="preparacao.html" class="on">Preparação</a><a href="atualizacoes.html">Atualizações</a></nav>
   <div class="grow"></div>
   <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Buscar... (ex: radiador, óleo, turbo)" autocomplete="off"></label>
 </header>
@@ -149,6 +149,7 @@ const SECOES = [
   { id: 'transmissao', icon: 'fa-road', cor: 'c4', titulo: 'Câmbio, tração e chão', sub: 'Também instalados na oficina. Cada peça gasta moral (exceto voltar para a original).',
     tiles: [
       { t: '⚙️ Câmbio', v: '**Engate rápido**: troca 90% mais rápida. **Automática**: modos Drive, Sport e Manual. **Manual**: só manual com embreagem.' },
+      { t: '🏁 Velocidade de fábrica', v: 'Cada carro tem a **velocidade final** e o **número de marchas** de fábrica (ex.: Jetta TSI **230 km/h** com 6 marchas, Amarok **242** com 8, Raptor **190** com 10). Para correr mais, faça o **remap de câmbio**.' },
       { t: '📈 Remap de câmbio', v: 'Stage **1 (+10%)**, **2 (+20%)**, **3 (+25%)** sem risco. Stage **4 (+40%)** e **5 (+60%)** podem **quebrar o câmbio** se andar muito tempo no limite.', cls: 'warn' },
       { t: '🛞 Tração', v: '**Traseira**, **dianteira** ou **4x4**.' },
       { t: '🔒 Diferencial', v: '**Normal** · **Blocado** (sempre travado, bom para drift) · **Com bloqueio** (liga e desliga no **X**).' },
@@ -167,8 +168,18 @@ const SECOES = [
     ]}],
   },
 
+  { id: 'ecu', icon: 'fa-fire', cor: 'c6', titulo: 'ECU, pops e drift', sub: 'Peças vendidas na loja da Pitstop e da Truck Diesel. O mecânico instala com o adaptador OBD (/ecutune).',
+    tiles: [
+      { t: '💥 Pop & Bang', v: '**ECU Stage 1** (ou maior) libera o pop: liga e desliga no **F9**. **Downpipe + Stage 2** libera o pop agressivo.' },
+      { t: '🔥 Chamas', v: '**Silencioso final**: chama grande. **Downpipe + Straight pipe + Stage 3**: lança-chamas.' },
+      { t: '⚙️ Flash de câmbio', v: 'Pop na troca de marcha.' },
+      { t: '🌀 Flash de Diferencial', v: 'Libera o **modo drift** na tecla **L**. Ligar o drift desliga o controle de tração junto.' },
+      { t: '🧰 ECU travada', v: 'O **Kit de Reparo ECU** destrava.', cls: 'warn' },
+    ],
+  },
+
   { id: 'volante', icon: 'fa-gamepad', cor: 'c7', titulo: 'Controles no volante', teclas: [
-    { g: 'Dirigindo', l: [['↓','Controle de tração: toque liga · segure 2s desliga'],['↑','Trocar tração'],['X','Bloqueio do diferencial'],['← / →','Modo do câmbio'],['SHIFT / CTRL','Subir / descer marcha'],['ALT','Embreagem'],['ESPAÇO','2-step (com FuelTech)'],['F3','Suspensão a ar']] },
+    { g: 'Dirigindo', l: [['↓','Controle de tração: segure 1s liga/desliga (desligado = traseira solta, freia igual)'],['L','Modo drift (com Flash de Diferencial)'],['F9','Pop & Bang'],['↑','Trocar tração'],['X','Bloqueio do diferencial'],['← / →','Modo do câmbio'],['SHIFT / CTRL','Subir / descer marcha'],['ALT','Embreagem'],['ESPAÇO','2-step (com FuelTech)'],['F3','Suspensão a ar']] },
   ]},
 
   { grupo: 'Cuidados', id: 'quebras', icon: 'fa-car-burst', cor: 'c6', titulo: 'O que quebra o motor',
