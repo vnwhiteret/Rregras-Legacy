@@ -36,6 +36,61 @@
 <script>
 // Para editar: cada atualizacao e uma secao (mais nova em cima). **texto** vira negrito e `texto` vira codigo.
 const SECOES = [
+  { grupo: '10/11', id: 'caminhoneiro-1011', icon: 'fa-truck', cor: 'c6', titulo: 'Caminhoneiro: level, peso e fretes', blocos: [
+    { h: 'Level vale mais', itens: [
+      'O **level do caminhoneiro** aumenta o **valor** e o **peso** da carga: level 1 paga **+10%**, level 2 **+20%**, level 3 **+35%** e level 4 ou mais **+50%**.',
+      'Caminhão **carregado** fica mais pesado e perde força. Descarregado, volta ao normal.',
+    ]},
+    { h: 'Frete de motores', itens: [
+      'Pedidos de motor da **Pitstop** e da **Truck Diesel** pagam **R$ 15.700 fixo**.',
+      'Só aparece pedido com **10 motores ou mais**. As oficinas pedem de **10 a 20** motores por vez.',
+      'O **BOB** e o **608D** também podem levar esses fretes.',
+    ]},
+    { h: 'Engate e nota fiscal', itens: [
+      '**Engate assistido**: dê ré até a quinta roda ficar embaixo do pino da carreta do frete e aperte **E**. Resolve os caminhões de quinta roda alta.',
+      '**Nota fiscal** nova da Legacy RP, com os dados do destinatário. A nota sai do inventário quando a carga é entregue.',
+    ]},
+  ]},
+  { id: 'empresas-1011', icon: 'fa-building-columns', cor: 'c3', titulo: 'Empresas de transporte', blocos: [
+    { h: 'Dinheiro da empresa', itens: [
+      'Quem tem **empresa de transporte** recebe os fretes no **saldo da empresa**, não mais em dinheiro.',
+      'A empresa recebe **fretes** e **aluguéis** dos caminhões. Gastos como **combustível**, **taxa de cancelamento** e **reparo** saem do **banco** do jogador.',
+      'Caminhão na concessionária: só compra quem tem **empresa de transporte**.',
+    ]},
+    { h: 'Painel no escritório', itens: [
+      'No escritório, aperte **E**: saldo, total ganho, gastos, lucro, fretes feitos e o botão de **saque**.',
+      'Cada caminhão mostra **ganhos, gastos, lucro e fretes**. Clique nele para ver as **cargas feitas**, as **canceladas** e o **combustível**.',
+    ]},
+  ]},
+  { id: 'carros-1011', icon: 'fa-fire', cor: 'c4', titulo: 'Carros: antilag, temperatura e câmbio', blocos: [
+    { h: 'Antilag', itens: [
+      '**Antilag Flash** na loja da Pitstop e da Truck Diesel, instalado pela oficina. Liga e desliga na tecla **K**.',
+      'Dá **pops e fogo no escape** acompanhando o giro, também na **redução de marcha**.',
+      'O sistema antigo de ECU (Stage, Pop & Bang no **F9**) saiu da cidade.',
+      'O **modo drift** (tecla **L**) não precisa mais do Flash de Diferencial.',
+    ]},
+    { h: 'Motor', itens: [
+      'O motor **ferve a 110°C**.',
+      'A **água do radiador** só baixa com o radiador **abaixo de 50%**, **furado** ou com o motor **fervendo**.',
+      'Para instalar **bielas** precisa do **kit de bronzinas**; para o **cabeçote**, do **kit de junta**.',
+      '**Bancada do motor** nova, com as peças de fora e de dentro do motor separadas.',
+    ]},
+    { h: 'Câmbio e HUD', itens: [
+      '**Caminhões** trocam de marcha rápido, igual aos carros.',
+      'O **HUD do carro** aparece só para o **motorista** e o **passageiro da frente**.',
+      'Caminhões saem sem prender na parede nas garagens do **DETRAN** e de **Paleto**.',
+    ]},
+  ]},
+  { id: 'casas-1011', icon: 'fa-house', cor: 'c1', titulo: 'Casas, condomínio e combustível', blocos: [
+    { h: 'O que mudou', itens: [
+      '**Vaca leiteira** para o quintal (móveis, categoria emprego): quem tem a chave tira leite.',
+      'Colocar e mover móveis com **ENTER** ficou certo. Se não der para colocar, aparece o **motivo** e nada é cobrado.',
+      '**Casas de condomínio** podem colocar móveis no **quintal**: perto da entrada, aperte **L** (dono e moradores).',
+      'A **máquina de joias** abre com **E** perto dela.',
+      '**Bomba de combustível** com tela nova: escolha o combustível e acompanhe litros e preço.',
+    ]},
+  ]},
+
   { grupo: '06/11', id: 'carros-0611', icon: 'fa-car', cor: 'c4', titulo: 'Carros: velocidade, câmbio e tração', blocos: [
     { h: 'Velocidade de fábrica', itens: [
       'Cada carro tem a **velocidade final** e o **número de marchas** de fábrica. Ex.: Jetta TSI **230 km/h** com 6 marchas, Amarok **242 km/h** com 8, Raptor **190 km/h** com 10.',

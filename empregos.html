@@ -164,9 +164,15 @@ const SECOES = [
       ['Entregar', 'Siga o GPS até o pátio, carregue e descarregue (**E**) e receba o frete. Pode pegar outra carga no **F6**.'],
       ['Devolver', 'Quando terminar, volte à central e devolva o caminhão no ponto de devolução.'],
     ],
-    tiles: [{ t: '💵 Pagamento', v: 'De **R$ 700 a R$ 1.000 por km** de distância entre a carga e a entrega.' }],
+    tiles: [
+      { t: '💵 Pagamento', v: 'De **R$ 700 a R$ 1.000 por km** de distância entre a carga e a entrega.' },
+      { t: '⭐ Level', v: 'Level 1 **+10%**, level 2 **+20%**, level 3 **+35%**, level 4 ou mais **+50%** no frete. A carga também fica mais pesada.' },
+      { t: '🔧 Motores', v: 'Frete de motores para as oficinas: **R$ 15.700 fixo** (pedidos de 10 motores ou mais).' },
+      { t: '🏢 Empresa', v: 'Quem tem **empresa de transporte** recebe os fretes no saldo da empresa e só ela compra caminhão na concessionária.' },
+    ],
     blocos: [{ h: 'Dicas', itens: [
       'Faça várias cargas seguidas antes de devolver: o aluguel é pago uma vez só.',
+      'Carreta não engata? Dê ré até a quinta roda ficar embaixo do pino e aperte **E**.',
       'Caminhão não é fuga válida: não use em ação ilegal.',
     ]}],
   },

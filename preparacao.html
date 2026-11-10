@@ -78,7 +78,8 @@ const SECOES = [
       ]},
       { h: 'Água e temperatura', itens: [
         '**Completar a água** qualquer um faz: motor **desligado**, precisa de **água de radiador + aditivo**.',
-        'Com pouca água o motor esquenta **muito** mais rápido.',
+        'Com pouca água o motor esquenta **muito** mais rápido. O motor **ferve a 110°C**.',
+        'A água só baixa com o radiador **abaixo de 50%**, **furado** ou com o motor **fervendo**.',
         'Acima de **118°C** a **junta do cabeçote** pode queimar: sai fumaça e o motor começa a **comer óleo**. Só o mecânico troca a junta.',
         'Bomba d’água quebrada: a água não circula e o motor esquenta mesmo com o radiador cheio.',
       ]},
@@ -168,18 +169,16 @@ const SECOES = [
     ]}],
   },
 
-  { id: 'ecu', icon: 'fa-fire', cor: 'c6', titulo: 'ECU, pops e drift', sub: 'Peças vendidas na loja da Pitstop e da Truck Diesel. O mecânico instala com o adaptador OBD (/ecutune).',
+  { id: 'ecu', icon: 'fa-fire', cor: 'c6', titulo: 'Antilag, pops e chamas', sub: 'Antilag Flash vendido na loja da Pitstop e da Truck Diesel. A oficina instala no carro.',
     tiles: [
-      { t: '💥 Pop & Bang', v: '**ECU Stage 1** (ou maior) libera o pop: liga e desliga no **F9**. **Downpipe + Stage 2** libera o pop agressivo.' },
-      { t: '🔥 Chamas', v: '**Silencioso final**: chama grande. **Downpipe + Straight pipe + Stage 3**: lança-chamas.' },
-      { t: '⚙️ Flash de câmbio', v: 'Pop na troca de marcha.' },
-      { t: '🌀 Flash de Diferencial', v: 'Libera o **modo drift** na tecla **L**. Ligar o drift desliga o controle de tração junto.' },
-      { t: '🧰 ECU travada', v: 'O **Kit de Reparo ECU** destrava.', cls: 'warn' },
+      { t: '💥 Antilag', v: 'Liga e desliga na tecla **K**. Dá **pops e fogo no escape** acompanhando o giro e na **redução de marcha**.' },
+      { t: '🔥 Chamas', v: 'Saem pelo escape junto com os pops. Todo mundo perto vê e ouve.' },
+      { t: 'ℹ️ Sistema antigo', v: 'As peças de ECU antigas (Stage, Pop & Bang no **F9**) saíram da cidade.', cls: 'warn' },
     ],
   },
 
   { id: 'volante', icon: 'fa-gamepad', cor: 'c7', titulo: 'Controles no volante', teclas: [
-    { g: 'Dirigindo', l: [['↓','Controle de tração: segure 1s liga/desliga (desligado = traseira solta, freia igual)'],['L','Modo drift (com Flash de Diferencial)'],['F9','Pop & Bang'],['↑','Trocar tração'],['X','Bloqueio do diferencial'],['← / →','Modo do câmbio'],['SHIFT / CTRL','Subir / descer marcha'],['ALT','Embreagem'],['ESPAÇO','2-step (com FuelTech)'],['F3','Suspensão a ar']] },
+    { g: 'Dirigindo', l: [['↓','Controle de tração: segure 1s liga/desliga (desligado = traseira solta, freia igual)'],['L','Modo drift (desliga o controle de tração junto)'],['K','Antilag (pops e fogo no escape)'],['↑','Trocar tração'],['X','Bloqueio do diferencial'],['← / →','Modo do câmbio'],['SHIFT / CTRL','Subir / descer marcha'],['ALT','Embreagem'],['ESPAÇO','2-step (com FuelTech)'],['F3','Suspensão a ar']] },
   ]},
 
   { grupo: 'Cuidados', id: 'quebras', icon: 'fa-car-burst', cor: 'c6', titulo: 'O que quebra o motor',
